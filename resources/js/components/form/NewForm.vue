@@ -261,7 +261,7 @@
                     <td v-if="formData.settings.isAction" class="text-right ">
                         <button @click="editData(item)" class="btn btn-sm shadow-none btn-outline-warning"><i class="fas fa-edit"></i></button>
                         <button @click="deleteData(item.id)" class="btn btn-sm shadow-none btn-outline-danger"><i class="fas fa-trash"></i></button>
-                        <a v-if="formData.model=='ProductGroup'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/administrator/products/product/'+item.id" target="_blank"><i class="fas fa-link"></i></a>
+                        <a v-if="formData.model=='ProductGroup'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/administrator/products/products/'+item.id" target="_blank"><i class="fas fa-link"></i></a>
                         <a v-if="formData.model=='Supplier'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/purchase/supplier_manager/supplier_bank/'+item.id" target="_blank"><i class="fas fa-piggy-bank"></i></a>
                         <a v-if="formData.model=='Supplier'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/purchase/supplier_manager/supplier_products/'+item.id" target="_blank"><i class="fas fa-boxes"></i></a>
 

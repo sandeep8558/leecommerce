@@ -48,6 +48,41 @@
                     </h2>
                 </div>
 
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingWebsiteManager">
+                        <button class="accordion-button {{ (request()->is('administrator/website_manager*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWebsiteManager" aria-expanded="true" aria-controls="collapseWebsiteManager">
+                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                            Website Manager
+                        </button>
+                    </h2>
+                    <div id="collapseWebsiteManager" class="accordion-collapse collapse {{ (request()->is('administrator/website_manager*')) ? 'show' : '' }}" aria-labelledby="headingWebsiteManager" data-bs-parent="#accordiWebsiteManagerxample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/slider')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/slider">Slider Manager</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/features')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/features">Features Manager</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingProductsManager">
+                        <button class="accordion-button {{ (request()->is('administrator/products*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProductsManager" aria-expanded="true" aria-controls="collapseProductsManager">
+                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                            Products Manager
+                        </button>
+                    </h2>
+                    <div id="collapseProductsManager" class="accordion-collapse collapse {{ (request()->is('administrator/products*')) ? 'show' : '' }}" aria-labelledby="headingProductsManager" data-bs-parent="#accordiProductsManagerxample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/category')) ? 'fw-bold' : '' }}" href="/administrator/products/category">Category</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/sub_category')) ? 'fw-bold' : '' }}" href="/administrator/products/sub_category">Sub Category</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/product_group')) ? 'fw-bold' : '' }}" href="/administrator/products/product_group">Product Group</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
