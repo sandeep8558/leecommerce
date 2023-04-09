@@ -70,7 +70,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 mb-3">
+                            <!-- <div class="col-12 mb-3">
                                 <label class="form-label">Please select Classrooms</label>
                                 <div v-for="(classroom, ii) in classrooms" :key="classroom.id">
                                     <div class="form-check">
@@ -84,7 +84,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -98,6 +98,30 @@
                 <button v-if="step.active == step.last" @click="save()" class="btn btn-primary">Save Exam</button>
             </div>
 
+        </div>
+
+        <div class="container-fluid mb-5">            
+            <div class="row mb-4" v-for="exam in exams.data" :key="exam.id">
+                <div class="col-12"><h4>{{ exam.exam_name }}</h4></div>
+                <div class="col-12" v-for="batch in exam.exam_batches" :key="batch.id">{{ batch.batch.batch_name }}</div>
+                <div class="col-12">
+                    <div class="row" v-for="sub in exam.exam_subjects" :key="sub.id">
+                        <div class="col">{{ sub.subject.subject }}</div>
+                        <div class="col-auto" v-for="invigilator in sub.exam_subject_invigilators" :key="invigilator.id">{{ invigilator.staff.employee_name }}</div>
+                        <div class="col-auto">{{ sub.dt }}</div>
+                        <div class="col-auto">{{ sub.total_marks }}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-outline-warning btn-sm">Edit</button>
+                    <button @click="deleteExam(exam.id)" class="btn btn-outline-danger btn-sm">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid mb-5">
+            <button :class="[(exams.prev_page_url==null ? 'disabled' : '')]" @click="getExams(exams.current_page - 1)" class="btn btn-outline-primary">Previous</button>
+            <button :class="[(exams.next_page_url==null ? 'disabled' : '')]" @click="getExams(exams.current_page + 1)" class="btn btn-outline-primary">Next</button>
         </div>
 
     </div>
@@ -121,7 +145,7 @@ export default {
 
     data: function (){
         return {
-            addNew: true,
+            addNew: false,
             validation: false,
             selectedBatches: [],
             examSubjects: [],
@@ -137,13 +161,51 @@ export default {
                 first: 0,
                 last: 2,
             },
+            exams : {
+                current_page : null,
+                data: [],
+                first_page_url: null,
+                from: null,
+                next_page_url: null,
+                path: null,
+                per_page: null,
+                prev_page_url: null,
+                to: null,
+            },
         }
     },
 
     methods : {
 
         save(){
-            console.log(this.req);
+            let url = "/mystaff/exam/save";
+            window.axios.post(url, {data: this.req}).then(res => {
+                console.log(res);
+                this.clearForm();
+                this.getExams();
+            });
+        },
+
+        deleteExam(exam_id){
+            let c = confirm("Are you sure to delete this exam?" + exam_id);
+            if(c){
+                let url = "/mystaff/exam/delete";
+                window.axios.post(url, {exam_id: exam_id}).then(res => {
+                    console.log(res);
+                    this.getExams();
+                });
+            }
+        },
+
+        clearForm(){
+            this.req.id = null;
+            this.req.exam_name = null;
+            this.req.batches = [];
+            this.req.students = [];
+            this.req.subjects = [];
+            this.step.active = 0;
+            this.step.last = 2;
+            this.addNew = false;
         },
 
         setStudents(){
@@ -184,8 +246,8 @@ export default {
                     dt: null,
                     total_marks: 100,
                     invigilator: [],
-                    classrooms: [],
-                    slots: [],
+                    /* classrooms: [],
+                    slots: [], */
                 };
                 subs.push(s);
             });
@@ -233,6 +295,12 @@ export default {
             }
         },
 
+        getExams(current_page = 1){
+            window.axios.get('/mystaff/exam/all?page=' + current_page).then(res => {
+                this.exams = res.data;
+            });
+        },
+
         /* getBusinessPlan(){
             window.axios.get('/auth/crud/showall?model=BusinessPlan&key=plan_name&val=id').then(res => {
                 this.formData.elements[1].options = res.data;
@@ -244,10 +312,13 @@ export default {
     created(){
 
         this.validate();
+
+        
         
     },
 
     mounted() {
+        this.getExams();
     },
 
 }

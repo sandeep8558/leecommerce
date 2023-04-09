@@ -27,8 +27,6 @@ class User extends Authenticatable
         'mobile',
         'email',
         'password',
-        'role',
-        'status',
         'api_token',
         'token_expire_at',
         'otp',
@@ -55,28 +53,39 @@ class User extends Authenticatable
 
 
     public function isAdministrator(){
-        if(($this->role == 'Administrator' && $this->status == 'Active')){
+        if($this->roles()->where('role', 'Administrator')->where('status', 'Active')->exists()){
             return true;
         }
         return false;
     }
 
-    public function isStaff() {
-        if(($this->role == 'Staff' && $this->status == 'Active')){
+    public function isWebAdmin(){
+        if($this->roles()->where('role', 'Web-Admin')->where('status', 'Active')->exists()){
+            return true;
+        }
+        return false;
+    }
+
+    public function isStoreManager(){
+        if($this->roles()->where('role', 'Store Manager')->where('status', 'Active')->exists()){
             return true;
         }
         return false;
     }
 
     public function isCustomer(){
-        if(($this->role == 'Customer' && $this->status == 'Active')){
+        if($this->roles()->where('role', 'Customer')->where('status', 'Active')->exists()){
             return true;
         }
         return false;
     }
 
-    public function staff(){
-        return $this->hasOne("App\Models\Staff", 'email', 'email');
+    public function notOnlyCoustomer(){
+        return $this->roles->count() > 1 ? true : false;
+    }
+
+    public function roles(){
+        return $this->hasMany("App\Models\Role");
     }
 
 }

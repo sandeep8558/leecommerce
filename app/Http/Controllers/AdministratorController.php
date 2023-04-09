@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
 {
-    public function administrator(){
-        return view("administrator.administrator");
+    public function index(){
+        return view("administrator.index");
     }
 
     public function user_manager(){

@@ -22,7 +22,7 @@
                 <div class="row">
 
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="name">Full Name</label>
                         <input id="name" type="text" class="form-control rounded-0 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                         @error('name')
@@ -32,17 +32,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
-                        <label class="font-weight-bold" for="billing_pincode">Pincode</label>
-                        <input class="form-control rounded-0 @error('billing_pincode') is-invalid @enderror" value="{{ old('billing_pincode') }}" id="billing_pincode" name="billing_pincode" type="text" required autocomplete="billing_pincode" autofocus>
-                        @error('billing_pincode')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="mobile">Mobile No</label>
                         <input id="mobile" type="text" class="form-control rounded-0 @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
                         @error('mobile')
@@ -52,7 +42,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="email">Email Address</label>
                         <input class="form-control rounded-0 @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email" name="email" type="email" required autocomplete="email" autofocus>
                         @error('email')
@@ -62,7 +52,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="password">Password</label>
 
 
@@ -80,7 +70,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="password-confirm">Confirm Password</label>
                         <input class="form-control rounded-0 @error('password') is-invalid @enderror" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password" >
                         @error('password')
@@ -91,30 +81,12 @@
                     </div>
 
 
-                    <div class="col-12 form-group">
-                        <label class="font-weight-bold" for="first_tier_id">Referance ID (Optional)</label>
-                        <?php
-                            $first_tier_id = old('email');
-                            $readonly = null;
-                            if(isset($_GET['first_tier_id'])){
-                                $first_tier_id = $_GET['first_tier_id'];
-                                $readonly = 'readonly';
-                            }
-                        ?>
-                        <input id="first_tier_id" type="text" class="form-control rounded-0 @error('first_tier_id') is-invalid @enderror" name="first_tier_id" value="{{ $first_tier_id }}" autocomplete="first_tier_id" autofocus {{$readonly}}>
-                        @error('first_tier_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-12">
+                    <div class="col-12 mb-2">
                         <div class="form-group">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="iamagree" id="iamagree" {{ old('iamagree') ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="iamagree">
-                                    <span class="small">I agree to VAINKHO.com <a target="_blank" href="/tnc">Terms & Conditions</a> and <a target="_blank" href="/privacypolicy">privacy policy</a></span>
+                                    <span class="small">I agree to <a target="_blank" href="/tnc">Terms & Conditions</a> and <a target="_blank" href="/privacypolicy">privacy policy</a></span>
                                 </label>
                             </div>
                         </div>
@@ -125,8 +97,12 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <input class="btn btn-dark rounded-0 btn-lg text-uppercase" type="submit" value="Register" >
+                    </div>
+
+                    <div class="col-12 form-group mb-2">
+                        <a class="btn btn-link px-0 mr-4" href="/login">{{ __('Already have accoutn? Login here!') }}</a>
                     </div>
 
                 </div>

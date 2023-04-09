@@ -13485,6 +13485,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* interface Classroom {
     rooms: [],
@@ -13496,7 +13520,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      addNew: true,
+      addNew: false,
       validation: false,
       selectedBatches: [],
       examSubjects: [],
@@ -13511,15 +13535,63 @@ __webpack_require__.r(__webpack_exports__);
         active: 0,
         first: 0,
         last: 2
+      },
+      exams: {
+        current_page: null,
+        data: [],
+        first_page_url: null,
+        from: null,
+        next_page_url: null,
+        path: null,
+        per_page: null,
+        prev_page_url: null,
+        to: null
       }
     };
   },
   methods: {
     save: function save() {
-      console.log(this.req);
+      var _this = this;
+
+      var url = "/mystaff/exam/save";
+      window.axios.post(url, {
+        data: this.req
+      }).then(function (res) {
+        console.log(res);
+
+        _this.clearForm();
+
+        _this.getExams();
+      });
+    },
+    deleteExam: function deleteExam(exam_id) {
+      var _this2 = this;
+
+      var c = confirm("Are you sure to delete this exam?" + exam_id);
+
+      if (c) {
+        var url = "/mystaff/exam/delete";
+        window.axios.post(url, {
+          exam_id: exam_id
+        }).then(function (res) {
+          console.log(res);
+
+          _this2.getExams();
+        });
+      }
+    },
+    clearForm: function clearForm() {
+      this.req.id = null;
+      this.req.exam_name = null;
+      this.req.batches = [];
+      this.req.students = [];
+      this.req.subjects = [];
+      this.step.active = 0;
+      this.step.last = 2;
+      this.addNew = false;
     },
     setStudents: function setStudents() {
-      var _this = this;
+      var _this3 = this;
 
       this.validate();
       var b = [];
@@ -13527,7 +13599,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.req.batches.length > 0) {
         this.req.batches.forEach(function (batch_id, i) {
-          _this.batches.forEach(function (batch) {
+          _this3.batches.forEach(function (batch) {
             if (batch_id == batch.batch_id) {
               b.push(batch);
               batch.open_batch.batch_courses.forEach(function (bc) {
@@ -13557,9 +13629,10 @@ __webpack_require__.r(__webpack_exports__);
           subject_id: sub.id,
           dt: null,
           total_marks: 100,
-          invigilator: [],
-          classrooms: [],
-          slots: []
+          invigilator: []
+          /* classrooms: [],
+          slots: [], */
+
         };
         subs.push(s);
       });
@@ -13605,6 +13678,14 @@ __webpack_require__.r(__webpack_exports__);
           this.step.active += 1;
         }
       }
+    },
+    getExams: function getExams() {
+      var _this4 = this;
+
+      var current_page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      window.axios.get('/mystaff/exam/all?page=' + current_page).then(function (res) {
+        _this4.exams = res.data;
+      });
     }
     /* getBusinessPlan(){
         window.axios.get('/auth/crud/showall?model=BusinessPlan&key=plan_name&val=id').then(res => {
@@ -13616,7 +13697,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.validate();
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.getExams();
+  }
 });
 
 /***/ }),
@@ -53275,159 +53358,6 @@ var render = function() {
                               })
                             ],
                             2
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "col-12 mb-3" },
-                            [
-                              _c("label", { staticClass: "form-label" }, [
-                                _vm._v("Please select Classrooms")
-                              ]),
-                              _vm._v(" "),
-                              _vm._l(_vm.classrooms, function(classroom, ii) {
-                                return _c(
-                                  "div",
-                                  { key: classroom.id },
-                                  [
-                                    _c("div", { staticClass: "form-check" }, [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value:
-                                              _vm.req.subjects[index]
-                                                .classrooms,
-                                            expression:
-                                              "req.subjects[index].classrooms"
-                                          }
-                                        ],
-                                        staticClass: "form-check-input",
-                                        attrs: {
-                                          type: "checkbox",
-                                          id: "classroom" + classroom.id
-                                        },
-                                        domProps: {
-                                          value: classroom.id,
-                                          checked: Array.isArray(
-                                            _vm.req.subjects[index].classrooms
-                                          )
-                                            ? _vm._i(
-                                                _vm.req.subjects[index]
-                                                  .classrooms,
-                                                classroom.id
-                                              ) > -1
-                                            : _vm.req.subjects[index].classrooms
-                                        },
-                                        on: {
-                                          change: [
-                                            function($event) {
-                                              var $$a =
-                                                  _vm.req.subjects[index]
-                                                    .classrooms,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked
-                                                  ? true
-                                                  : false
-                                              if (Array.isArray($$a)) {
-                                                var $$v = classroom.id,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      _vm.req.subjects[index],
-                                                      "classrooms",
-                                                      $$a.concat([$$v])
-                                                    )
-                                                } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      _vm.req.subjects[index],
-                                                      "classrooms",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
-                                                }
-                                              } else {
-                                                _vm.$set(
-                                                  _vm.req.subjects[index],
-                                                  "classrooms",
-                                                  $$c
-                                                )
-                                              }
-                                            },
-                                            function($event) {
-                                              return _vm.makeSlots()
-                                            }
-                                          ]
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass: "form-check-label",
-                                          attrs: {
-                                            for: "classroom" + classroom.id
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(classroom.classroom_name)
-                                          )
-                                        ]
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm._l(classroom.slts, function(slot, iii) {
-                                      return _c(
-                                        "div",
-                                        {
-                                          key: slot.id,
-                                          staticClass: "form-check"
-                                        },
-                                        [
-                                          _c("input", {
-                                            staticClass: "form-check-input",
-                                            attrs: {
-                                              type: "checkbox",
-                                              name: "slot" + slot.id + "-" + ii,
-                                              id: "slot" + slot.id + "-" + ii
-                                            },
-                                            domProps: { value: slot.id }
-                                          }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass: "form-check-label",
-                                              attrs: {
-                                                for: "slot" + slot.id + "-" + ii
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(slot.name) +
-                                                  " " +
-                                                  _vm._s(
-                                                    "slot" + slot.id + "-" + ii
-                                                  )
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                )
-                              })
-                            ],
-                            2
                           )
                         ])
                       ])
@@ -53489,7 +53419,116 @@ var render = function() {
           ],
           2
         )
-      : _vm._e()
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container-fluid mb-5" },
+      _vm._l(_vm.exams.data, function(exam) {
+        return _c(
+          "div",
+          { key: exam.id, staticClass: "row mb-4" },
+          [
+            _c("div", { staticClass: "col-12" }, [
+              _c("h4", [_vm._v(_vm._s(exam.exam_name))])
+            ]),
+            _vm._v(" "),
+            _vm._l(exam.exam_batches, function(batch) {
+              return _c("div", { key: batch.id, staticClass: "col-12" }, [
+                _vm._v(_vm._s(batch.batch.batch_name))
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-12" },
+              _vm._l(exam.exam_subjects, function(sub) {
+                return _c(
+                  "div",
+                  { key: sub.id, staticClass: "row" },
+                  [
+                    _c("div", { staticClass: "col" }, [
+                      _vm._v(_vm._s(sub.subject.subject))
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(sub.exam_subject_invigilators, function(
+                      invigilator
+                    ) {
+                      return _c(
+                        "div",
+                        { key: invigilator.id, staticClass: "col-auto" },
+                        [_vm._v(_vm._s(invigilator.staff.employee_name))]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto" }, [
+                      _vm._v(_vm._s(sub.dt))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-auto" }, [
+                      _vm._v(_vm._s(sub.total_marks))
+                    ])
+                  ],
+                  2
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12" }, [
+              _c("button", { staticClass: "btn btn-outline-warning btn-sm" }, [
+                _vm._v("Edit")
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-danger btn-sm",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteExam(exam.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
+          ],
+          2
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "container-fluid mb-5" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary",
+          class: [_vm.exams.prev_page_url == null ? "disabled" : ""],
+          on: {
+            click: function($event) {
+              return _vm.getExams(_vm.exams.current_page - 1)
+            }
+          }
+        },
+        [_vm._v("Previous")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary",
+          class: [_vm.exams.next_page_url == null ? "disabled" : ""],
+          on: {
+            click: function($event) {
+              return _vm.getExams(_vm.exams.current_page + 1)
+            }
+          }
+        },
+        [_vm._v("Next")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -68956,8 +68995,8 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Projects\NEW\mangalmurti\webapp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Projects\NEW\mangalmurti\webapp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Projects\NEW\leecommerce\website\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projects\NEW\leecommerce\website\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

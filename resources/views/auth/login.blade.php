@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row">
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="login_email">Email Address</label>
                         <input class="form-control rounded-0 @error('email') is-invalid @enderror" value="{{ old('email') }}" id="login_email" name="email" type="email" required autocomplete="email" autofocus>
                         @error('email')
@@ -29,7 +29,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <label class="font-weight-bold" for="login_password">Password</label>
                         <div class="input-group mb-3">
                             <input class="form-control rounded-0 @error('password') is-invalid @enderror" id="login_password" type="password" name="password" required autocomplete="current-password" >
@@ -45,7 +45,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group mb-2">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 form-group">
+                    <div class="col-12 form-group my-2">
                         <input class="btn btn-dark rounded-0 text-uppercase btn-lg" type="submit" value="Login" >
                     </div>
 
@@ -64,6 +64,11 @@
                                 {{ __('Forgot Password?') }}
                             </a>
                         @endif
+                        <a class="btn btn-link px-0 mr-4 float-right" href="/register">{{ __('Register Here!') }}</a>
+                    </div>
+
+                    <div class="col-12 form-group">
+                            
                     </div>
 
                 </div>

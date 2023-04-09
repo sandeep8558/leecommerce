@@ -55,11 +55,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'mobile' => ['required', 'min:8'],
+            'mobile' => ['required', 'min:8', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'first_tier_id' => [ new IsReferance() ],
-            'billing_pincode' => ['required', new IsPincode()],
         ]);
     }
 
@@ -71,75 +69,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $freeDownlineBalance = Setting::where('key', 'Free Downline Balance')->first()['val_a'];
-        $random = User::
-        where('role', 'Customer')
-        ->where('billing_pincode', $data['billing_pincode'])
-        ->whereHas('wallets', function($q) use($freeDownlineBalance){
-            $q
-            ->select( DB::raw("IFNULL( SUM( ( CASE WHEN side = 'Credit' THEN amount END ) ), 0) AS credit,
-            IFNULL( SUM( ( CASE WHEN side = 'Debit' THEN amount END ) ), 0) AS debit"))
-            ->havingRaw('credit - debit >= ?', [$freeDownlineBalance]);
-        })
-        ->inRandomOrder()
-        ->first();
-
-        if($data['first_tier_id'] == null || $data['first_tier_id'] == ''){
-            if($random == null){
-                $ref = null;
-                $referance = null;
-            } else {
-                if($random != null){
-                    $ref = $random->id;
-                    $referance = "Company";
-                } else {
-                    $ref = null;
-                    $referance = null;
-                }
-            }
-        } else {
-            $ref = $data['first_tier_id'];
-            $referance = "Self";
-        }
-
-        $first_tier_id = $ref;
-        $second_tier_id = null;
-        $third_tier_id = null;
-        $fourth_tier_id = null;
-        $fifth_tier_id = null;
-
-        if($first_tier_id != null){
-            $first_tier_id = $first_tier_id;
-            $second = User::find($first_tier_id);
-            if($second != null){
-                $second_tier_id = $second->first_tier_id;
-                $third = User::find($second_tier_id);
-                if($third != null){
-                    $third_tier_id = $third->first_tier_id;
-                    $fourth = User::find($third_tier_id);
-                    if($fourth != null){
-                        $fourth_tier_id = $fourth->first_tier_id;
-                        $fifth = User::find($fourth_tier_id);
-                        if($fifth != null){
-                            $fifth_tier_id = $fifth->first_tier_id;
-                        }
-                    }
-                }
-            }
-        }
-
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'mobile' => $data['mobile'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'ref' => $referance,
-            'first_tier_id' => $first_tier_id,
-            'second_tier_id' => $second_tier_id,
-            'third_tier_id' => $third_tier_id,
-            'fourth_tier_id' => $fourth_tier_id,
-            'fifth_tier_id' => $fifth_tier_id,
-            'billing_pincode' => $data['billing_pincode'],
         ]);
+
+        $user->roles()->create([
+            "role" => "Customer",
+            "Status" => "Active"
+        ]);
+
+        return $user;
     }
 }

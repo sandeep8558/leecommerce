@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         if(Auth::check()){
             $user = Auth::user();
-            $role = $user->role;
+            $role = $user->roles()->first()->role;
             
             switch($role){
 
@@ -34,8 +34,12 @@ class HomeController extends Controller
                 return redirect('/administrator');
                 break;
 
-                case "Staff":
-                return redirect('/mystaff');
+                case "Web-Admin":
+                return redirect('/webadmin');
+                break;
+
+                case "Store Manager":
+                return redirect('/storemanager');
                 break;
 
                 case "Customer":

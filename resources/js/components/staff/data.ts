@@ -1,4 +1,0 @@
-interface Classroom {
-    rooms: [],
-    slots: [],
-}

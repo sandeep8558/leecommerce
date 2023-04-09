@@ -21,7 +21,7 @@
 <div id="menu" class="menu bg-light">
     <div class="menu-container">
         <div class="container p-0 bg-dark text-light">
-            <p class="text-uppercase mb-0 p-3">ADMINISTRATOR</p>
+            <p class="text-uppercase mb-0 p-3">WEB-ADMIN</p>
         </div>
 
         <ul class="list-group mb-5 rounded-0 accordion p-1" id="accordionExample">
@@ -32,7 +32,7 @@
             
                 <div class="accordion-item bg-primary">
                     <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                        <a href="/webadmin" class="btn accordion-button collapsed no-caret {{ (request()->is('webadmin')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             Dashboard
                         </a>

@@ -32,8 +32,6 @@
 
 <div class="container">
 
-    <website-products id="{{$id}}" what="{{$what}}" warehouse_id="{{$warehouse_id}}" cols="col-6 col-lg-4 col-xl-3"></website-products>
-
     <div class="text-center my-5">
         <a href="/available" class="btn btn-primary btn-lg">Go to all available products</a>
     </div>
