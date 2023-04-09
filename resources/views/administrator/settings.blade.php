@@ -5,4 +5,5 @@
 @endsection
 
 @section('content')
+<admin-settings></admin-settings>
 @endsection

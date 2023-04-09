@@ -14,6 +14,7 @@ Route::resource('/crud', 'App\Http\Controllers\CrudController');
 Route::post('/crud/showall', [App\Http\Controllers\CrudController::class, 'showall']);
 
 
+
 /* Auth Routes */
 Route::group(['middleware'=>['auth']], function(){
 });
@@ -22,6 +23,9 @@ Route::group(['middleware'=>['auth']], function(){
 /* Administrator Routes */
 Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator', [App\Http\Controllers\AdministratorController::class, 'index'])->name("administrator");
+    Route::get('/administrator/settings', [App\Http\Controllers\SettingController::class, 'settings']);
+    Route::post('/administrator/get_setting', [App\Http\Controllers\SettingController::class, 'get_setting']);
+    Route::post('/administrator/save_setting', [App\Http\Controllers\SettingController::class, 'save_setting']);
 });
 
 
