@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
+        "razorpay": "^2.8.6",
         "tailwindcss": "^2.0.1",
         "vue-debounce": "^3.0.1",
         "vue-loading-spinner": "^1.0.11",

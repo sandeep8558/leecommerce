@@ -10,20 +10,45 @@
 
 <div class="container-fluid px-0">
 
-    <div class="image image-s image-hd-md image-header-lg">
-        <img class="image-cover d-none d-md-block" src="/images/hero.jpg" alt="Vainkho Ecommerce private limited">
-        <img class="image-cover d-block d-md-none" src="/images/hero-mob.jpg" alt="Vainkho Ecommerce private limited">
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            @foreach($sliders as $i=>$slider)
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$i}}" class="{{$i==0 ? 'active' : ''}}" aria-current="{{$i==0 ? true : false}}" aria-label="Slide {{$i}}"></button>
+            @endforeach
+        </div>
+
+        <div class="carousel-inner">
+            @foreach($sliders as $i=>$slider)
+                <div class="carousel-item {{$i==0 ? 'active' : ''}}">
+                    <a class="w-100" href="{{$slider->link}}">
+                        <div class="image image-l image-header-md">
+                            <img src="{{$slider->media}}" class="image-cover" alt="{{$slider->title}}">
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    
     </div>
 
 </div>
 
 
-<div class="jumbotron text-center">
+<div class="container-fluid text-center py-5">
     <div class="container">
-        <h1 class="display-4">Vainkho?</h1>
-        <p class="lead">Vainkho is Ecommerce website and deals in groceries and all kinds of home products. We have designed a special business plan for our customers, who are willing to grow and become successful in their life. Start purchasing discounted products from us. By doing so, you will become eligible to earn passive income.</p>
+        <h2 class="fw-bold">{{ $welcome_title }}</h2>
+        <p class="lead">{{ $welcome_note }}</p>
         <hr>
-        <p>To start with, you need to enroll yourself on our website.</p>
+        <p>{{ $welcome_call }}</p>
         <a class="btn btn-lg btn-primary mr-3" href="/register">Register Now!</a>
         <a class="btn btn-lg btn-dark" href="/category/3">Shop Now!</a>
     </div>
@@ -31,45 +56,19 @@
 </div>
 
 <div class="container">
-
-    <div class="text-center my-5">
-        <a href="/available" class="btn btn-primary btn-lg">Go to all available products</a>
-    </div>
-
-</div>
-
-<div class="container py-5">
-
-    <!-- <div class="row align-items-center">
-        <div class="col-12 col-lg-6 mb-5">
-            <iframe style="width:100%;" height="315" src="https://www.youtube.com/embed/abcd" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="row">
+        @foreach($features as $feature)
+        <div class="col-12 col-md-6 mb-5">
+            <a class="btn btn-clear w-100" href="{{$feature->link}}">
+                <div class="image image-hd rounded-lg">
+                    <img src="{{$feature->media}}" class="image-cover" alt="{{$feature->title}}">
+                </div>
+            </a>
         </div>
-        <div class="col-12 col-lg-6 mb-5">
-            <h4 class="mb-3 h4 font-weight-bold">Why to choose us?</h4>
-            <p class="lead">Do you often shop online? <br> Do you get anything back from the website? <br> Your answer is No. But if you will join us, you will certainly get something in return from us, and that would be your extra passive income.</p>
-        </div>
-    </div> -->
-
-    <div class="row align-items-center">
-        <div class="col-12 mb-5">
-            <h4 class="mb-3 h4 font-weight-bold">Why to choose us?</h4>
-            <p class="lead">Do you often shop online? <br> Do you get anything back from the website? <br> Your answer is No. But if you will join us, you will certainly get something in return from us, and that would be your extra passive income.</p>
-        </div>
-    </div>
-
-</div>
-
-<div class="container mb-5">
-    <div class="row align-items-center">
-        <div class="col-auto">
-            <p class="title-lg"><i class="fas fa-rupee-sign"></i> 1000</p>
-        </div>
-        <div class="col">
-            <p class="para-lg font-weight-bold">Add Rs 1000/- in your wallet right now!!!</p>
-            <p class="para-lg">Now after adding Rs 1000/- in your wallet you don't need to tell anyone about us. all those who join without referance can be added in your downline.</p>
-            <p class="para-lg">Get benifit of unlimited free downline.</p>
-        </div>
+        @endforeach
     </div>
 </div>
+
+
 
 @endsection

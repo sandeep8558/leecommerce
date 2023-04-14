@@ -22,55 +22,83 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
+                <a class="navbar-brand" style="line-height: 1em;" href="/">
+                    <div class="row">
+                        @if($show_logo == 'Enable')
+                        <div class="col-auto">
+                            <img src="{{ $logo }}" alt="" style="height:35px;">
+                        </div>
+                        @endif
 
-                <a class="navbar-brand" href="/">{{ config('app.name', 'Laravel') }}</a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        @if($show_app_name == 'Enable' || $show_tag_line == 'Enable')
+                        <div class="col px-0">
+                            @if($show_app_name == 'Enable')
+                            <h5 class="p-0 m-0" style="line-height: 1em;">{{ $app_name }}</h5>
+                            @endif
+                            @if($show_tag_line == 'Enable')
+                            <span style="font-size:10px;line-height: 1em;">{{ $tag_line }}</span>
+                            @endif
+                        </div>
+                        @endif
+                    </div>
+                </a>
+                <button style="border: none;outline:none; box-shadow:none;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                    <ul class="navbar-nav ml-auto">
+                        @foreach($cats as $category)
+                        <li class="nav-item">
+                            <a class="nav-link {{ (request()->is('category/'.$category->id.'*')) ? 'active' : '' }}" href="/category/{{$category->id}}">{{$category->category}}</a>
+                        </li>
+                        @endforeach
 
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link {{ (request()->is('login')) ? 'active' : '' }}" href="{{ route('login') }}"><i class="fas fa-user fa-fw"></i></a>
                         </li>
                         @endguest
 
-                        @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">My Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt fa-fw"></i>
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                        @endauth
-
                     </ul>
-
                 </div>
             </div>
         </nav>
 
         <main class="">
+            <div class="btn-group-vertical position-fixed right-0 top-50" role="group" aria-label="Vertical button group" style="z-index:1000; transform:translate(0%, -50%)">
+                <a class="btn btn-lg btn-primary rounded-0 border-bottom" style="border-radius: 10px 0 0 0 !important;" href="/"><i class="fas fa-search"></i></a>
+                <a class="btn btn-lg btn-primary position-relative border-bottom" href="/cart">
+
+                    <span class="badge text-bg-secondary text-light position-absolute top-50 translate-middle {{(session()->has('cart') && sizeof(session('cart')) > 0) ? '' : 'd-none'}}" style="left: -5px;" id="myCart">{{ sizeof(session("cart")) }}</span>
+
+                    <i class="fas fa-shopping-cart"></i></a>
+                <a class="btn btn-lg btn-primary border-bottom" href="/wishlist"><i class="fas fa-heart"></i></a>
+                @guest
+                <a class="btn btn-lg btn-primary rounded-0" style="border-radius: 0 0 0 10px !important;" href="{{ route('login') }}"><i class="fas fa-user fa-fw"></i></a>
+                @endguest
+                @auth
+                <a href="/customer" class="btn btn-lg btn-primary border-bottom"><i class="fas fa-user fa-fw"></i></a>
+                <a class="btn btn-lg btn-primary rounded-0" style="border-radius: 0 0 0 10px !important;" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt fa-fw"></i>
+                </a>
+                @endauth
+            </div>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
             @yield('content')
         </main>
 
 
         <div class="container-fluid bg-dark text-light py-3">
-            <div class="container">
-            <span class="para" style="color: #999;" >Copyright &copy; {{ date('Y') }} <a href="/" class="text-light text-uppercase">{{ config('app.name', 'Laravel') }}</a> All Rights Reserved.</span>
+            <div class="container text-center">
+            <span class="para" style="color: #999;" >Copyright &copy; {{ date('Y') }} <a href="/" class="text-light text-uppercase">{{ $app_name }}</a> All Rights Reserved.</span>
             </div>
         </div>
     </div>

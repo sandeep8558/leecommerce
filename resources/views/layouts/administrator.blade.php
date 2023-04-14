@@ -48,6 +48,15 @@
                     </h2>
                 </div>
 
+                <div class="accordion-item bg-primary">
+                    <h2 class="accordion-header" id="headingOne">
+                        <a href="/administrator/purchase" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/purchase')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                            Purchase
+                        </a>
+                    </h2>
+                </div>
+
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingWebsiteManager">
                         <button class="accordion-button {{ (request()->is('administrator/website_manager*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWebsiteManager" aria-expanded="true" aria-controls="collapseWebsiteManager">

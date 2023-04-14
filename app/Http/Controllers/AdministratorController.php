@@ -41,6 +41,10 @@ class AdministratorController extends Controller
         return view("administrator.products.products", compact("product_group"));
     }
 
+    public function purchase(){
+        return view("administrator.purchase");
+    }
+
     public function user_manager(){
         return view("administrator.user_manager");
     }

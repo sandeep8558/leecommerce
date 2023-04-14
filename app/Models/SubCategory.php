@@ -21,11 +21,11 @@ class SubCategory extends Model
     }
 
     public function product_groups(){
-        $this->hasMany("App\Models\ProductGroup");
+        return $this->hasMany("App\Models\ProductGroup")->where('display', 'Show');
     }
 
     public function products(){
-        $this->hasMany("App\Models\Product");
+        return $this->hasMany("App\Models\Product")->where('display', 'Show');
     }
 
     protected $appends = ['data_category'];

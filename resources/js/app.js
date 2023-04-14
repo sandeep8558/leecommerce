@@ -57,6 +57,15 @@ import AdminProductsCategory from './components/administrator/products/Category.
 import AdminProductsSubCategory from './components/administrator/products/SubCategory.vue';
 import AdminProductsProductGroup from './components/administrator/products/ProductGroup.vue';
 import AdminProductsProducts from './components/administrator/products/Products.vue';
+import AdminPurchase from './components/administrator/Purchase.vue';
+
+/* Elements */
+import Product from './components/elements/Product.vue';
+import ProductDetail from './components/elements/ProductDetail.vue';
+import Wishlist from './components/elements/Wishlist.vue';
+import Cart from './components/elements/Cart.vue';
+import Checkout from './components/elements/Checkout.vue';
+import CancelButton from './components/elements/CancelButton.vue';
 
 
 const app = new Vue({
@@ -70,5 +79,13 @@ const app = new Vue({
         AdminProductsSubCategory,
         AdminProductsProductGroup,
         AdminProductsProducts,
+        AdminPurchase,
+
+        Product,
+        ProductDetail,
+        Wishlist,
+        Cart,
+        Checkout,
+        CancelButton,
     }
 });

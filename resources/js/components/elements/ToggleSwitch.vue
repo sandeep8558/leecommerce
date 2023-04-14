@@ -9,6 +9,11 @@
         <button @click="updateValueToServer()" :class="[(isTampered ? 'btn-danger' : 'btn-outline-success')]" class="btn" type="button" id="button-addon2">Save</button>
     </div>
 
+    <div v-if="what == 'textarea'" class="mb-3">
+        <textarea @input="makeTampered()" :class="[(isTampered ? 'is-invalid' : 'is-valid')]" class="form-control" id="exampleFormControlTextarea1" rows="5" cols="50" v-model="val"></textarea>
+        <button @click="updateValueToServer()" :class="[(isTampered ? 'btn-danger' : 'btn-outline-success')]" class="btn float-right" type="button" id="button-addon2">Save</button>
+    </div>
+
     <form enctype="multipart/form-data" action="POST" @submit.prevent="submitForm($event)">
         <div v-if="what == 'image'" class="input-group">
             <img :src="val" style="height:35px;" class="mr-2">

@@ -23,7 +23,7 @@ export default {
                 model : "Product",
                 action : "CRUD", /* CRUD | EDIT | SEARCH */
                 method : "",
-                custom_query : [],
+                custom_query : ['product_group_id', '==', this.product_group.id],
                 with : [],
                 mail : {
                     name : "Sandeep Rathod",

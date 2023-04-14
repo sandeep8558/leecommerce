@@ -88,4 +88,16 @@ class User extends Authenticatable
         return $this->hasMany("App\Models\Role");
     }
 
+    public function wish_lists(){
+        return $this->hasMany("App\Models\WishList");
+    }
+
+    public function addresses(){
+        return $this->hasMany("App\Models\Address")->where('deleted', 'No');
+    }
+
+    public function orders(){
+        return $this->hasMany("App\Models\Order");
+    }
+
 }

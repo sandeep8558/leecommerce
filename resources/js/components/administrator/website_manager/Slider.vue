@@ -109,7 +109,7 @@ export default {
                     },
 
                     {
-                        label : 'Slide Media',
+                        label : 'Slide Media 2000X700px',
                         name : 'media',
                         value : '',
                         values : [],

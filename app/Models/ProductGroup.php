@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class ProductGroup extends Model
 {
@@ -35,7 +36,7 @@ class ProductGroup extends Model
     }
 
     public function products(){
-        $this->hasMany("App\Models\Product");
+        return $this->hasMany("App\Models\Product")->where('display', 'Show');
     }
 
     protected $appends = ['data_category', 'data_sub_category'];
