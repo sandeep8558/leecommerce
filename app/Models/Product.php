@@ -54,6 +54,10 @@ class Product extends Model
         return $this->hasMany("App\Models\WishList");
     }
 
+    public function order_data(){
+        return $this->hasMany("App\Models\OrderData");
+    }
+
     protected $appends = ['data_category', 'data_sub_category', 'data_product_group', 'data_qty', 'data_size', 'data_color', 'data_weight', 'data_volume', 'data_wishlist', 'data_cart', 'data_calc'];
 
     public function getDataCategoryAttribute(){
@@ -70,7 +74,9 @@ class Product extends Model
 
     public function getDataQtyAttribute(){
         $purchase = $this->purchases()->sum('quantity');
-        $sale = 0;
+        $sale = $this->order_data()->where('cancelled_at', null)->whereHas('order', function($q){
+            $q->where('orderstatus', 'Success')->where('cancelled_at', null);
+        })->sum('qty');
         return $purchase - $sale;
     }
 

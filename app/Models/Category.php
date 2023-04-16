@@ -13,6 +13,9 @@ class Category extends Model
         "display",
         "category",
         "media",
+        "title",
+        "keywords",
+        "description",
     ];
 
     public function sub_categories(){

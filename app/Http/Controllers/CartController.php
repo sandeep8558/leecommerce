@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Page;
+use App\Models\Offer;
 
 class CartController extends Controller
 {
@@ -16,7 +18,8 @@ class CartController extends Controller
         $delivery_charges = Setting::where('key', 'Delivery Charges')->exists() ? Setting::where('key', 'Delivery Charges')->first()->val : null;
         $free_delivery_amount = Setting::where('key', 'Free Delivery Amount')->exists() ? Setting::where('key', 'Free Delivery Amount')->first()->val : null;
         $minimum_order_amount = Setting::where('key', 'Minimum Order Amount')->exists() ? Setting::where('key', 'Minimum Order Amount')->first()->val : null;
-        return view("website.cart", compact("delivery_timing", "buyqty", "delivery_charges", "free_delivery_amount", "minimum_order_amount"));
+        $meta = Page::where('page', 'Cart')->latest()->first();
+        return view("website.cart", compact("delivery_timing", "buyqty", "delivery_charges", "free_delivery_amount", "minimum_order_amount", "meta"));
     }
 
     public function add(Request $request){
@@ -48,7 +51,7 @@ class CartController extends Controller
         return session("cart");
     }
 
-    public function get_cart(){
+    public function get_cart(Request $request){
         $pids = [];
         $cart = session("cart");
         foreach($cart as $c){
@@ -77,14 +80,24 @@ class CartController extends Controller
         }
         $response["calc"]["discount"] = $response["calc"]["mrp_total"] - $response["calc"]["rate_total"];
 
+        if(isset($request->offer_id)){
+            $offer = Offer::find($request->offer_id);
+            if($offer->offer_type == 'Flat Discount'){
+                $response["calc"]["offer_discount"] = $offer->offer_value;
+            }
+            if($offer->offer_type == 'Percentile Discount'){
+                $response["calc"]["offer_discount"] = $response["calc"]["rate_total"] * $offer->offer_value / 100;
+                if($response["calc"]["offer_discount"] > $offer->maximum_offer_amount){
+                    $response["calc"]["offer_discount"] = $offer->maximum_offer_amount;
+                }
+            }
+        }
+
         $minimum_order_amount = Setting::where('key', 'Minimum Order Amount')->exists() ? Setting::where('key', 'Minimum Order Amount')->first()->val : null;
         $response["calc"]["canProceed"] = $response["calc"]["rate_total"] >= $minimum_order_amount ? true : false;
-
         $delivery_charges = Setting::where('key', 'Delivery Charges')->exists() ? Setting::where('key', 'Delivery Charges')->first()->val : null;
         $free_delivery_amount = Setting::where('key', 'Free Delivery Amount')->exists() ? Setting::where('key', 'Free Delivery Amount')->first()->val : null;
-
         $response["calc"]["delivery_charges"] = $response["calc"]["rate_total"] >= $free_delivery_amount ? 0 : $delivery_charges ;
-
         $response["calc"]["payable"] =  $response["calc"]["rate_total"] + $response["calc"]["delivery_charges"] - $response["calc"]["offer_discount"];
 
         return $response;

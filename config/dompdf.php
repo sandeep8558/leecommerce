@@ -169,6 +169,10 @@ return array(
          * html page in a reference browser.
          *
          * In pdf, always 1 pt = 1/72 inch
+         * In pdf, always 1 pt = 25.4/72 mm
+         * 30mm = 30*25.4/72
+         * 100mm = 100*25.4/72
+         * 75mm = 75*25.4/72
          *
          * Rendering resolution of various browsers in px per inch:
          * Windows Firefox and Internet Explorer:

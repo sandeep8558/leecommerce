@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
 
             $table->bigInteger('user_id')->index();
             $table->bigInteger('address_id')->index();
+            $table->bigInteger('offer_id')->nullable();
             $table->double('mrp_total')->default(0);
             $table->double('cost_total')->default(0);
             $table->double('tax_total')->default(0);

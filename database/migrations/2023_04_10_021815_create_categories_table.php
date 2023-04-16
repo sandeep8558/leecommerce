@@ -20,6 +20,10 @@ class CreateCategoriesTable extends Migration
             $table->string('category');
             $table->text('media')->nullable();
 
+            $table->string('title')->nullable();
+            $table->text('keywords')->nullable();
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }

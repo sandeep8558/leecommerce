@@ -14,6 +14,9 @@ class SubCategory extends Model
         "category_id",
         "sub_category",
         "media",
+        "title",
+        "keywords",
+        "description",
     ];
 
     public function category(){

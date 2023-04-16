@@ -25,6 +25,9 @@ class ProductGroup extends Model
         "size",
         "description",
         "tags",
+        "title",
+        "keywords",
+        "description",
     ];
 
     public function category(){
@@ -39,7 +42,10 @@ class ProductGroup extends Model
         return $this->hasMany("App\Models\Product")->where('display', 'Show');
     }
 
-    protected $appends = ['data_category', 'data_sub_category'];
+    protected $appends = [
+        'data_category',
+        'data_sub_category',
+    ];
 
     public function getDataCategoryAttribute(){
         return $this->category->category;

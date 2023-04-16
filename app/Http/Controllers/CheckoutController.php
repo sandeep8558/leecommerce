@@ -9,8 +9,10 @@ use Auth;
 use App\Models\Address;
 use App\Http\Requests\AddressRequest;
 use Razorpay\Api\Api;
+use App\Models\Page;
 
 use App\Models\Order;
+use App\Models\Offer;
 
 class CheckoutController extends Controller
 {
@@ -32,7 +34,8 @@ class CheckoutController extends Controller
         $online = Setting::where('key', 'Online payment')->exists() ? Setting::where('key', 'Online payment')->first()->val : null;
         $color = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
 
-        return view("website.checkout", compact("delivery_timing", "buyqty", "delivery_charges", "free_delivery_amount", "minimum_order_amount", "user", "cod", "online", "color"));
+        $meta = Page::where('page', 'Checkout')->latest()->first();
+        return view("website.checkout", compact("delivery_timing", "buyqty", "delivery_charges", "free_delivery_amount", "minimum_order_amount", "user", "cod", "online", "color", "meta"));
     }
 
     public function save_address(AddressRequest $request){
@@ -84,6 +87,10 @@ class CheckoutController extends Controller
             $order_id = $razorOrder['id'];
         }
 
+        if($order->orderstatus == "Success"){
+            session(["cart" => []]);
+        }
+
         return [
             "order_id"=>$order_id,
             "order"=>$order
@@ -95,5 +102,88 @@ class CheckoutController extends Controller
         $input = $request->all();
         $input["payment_at"] = date('Y-m-d H:i:s');
         return Order::find($request->id)->update($input);
+    }
+
+    public function check_coupon(Request $request){
+        $today = date('Y-m-d');
+        $response = [
+            "message" => "",
+            "data" => null
+        ];
+        $offer = Offer::where('coupon_code', $request->coupon);
+
+        /* Checked Coupon Exist OR Not */
+        if($offer->exists()){
+
+            if($offer->whereDate('start', '<=', $today)->whereDate('end', '>=', $today)->exists()){
+                
+                $offer = $offer->first();
+                
+                $isValidUser = false;
+
+                if($offer->offer_for == 'All Orders'){
+                    $isValidUser = true;
+                }
+                
+                if($offer->offer_for == 'First Order'){
+                    if(Auth::user()->orders()->where('orderstatus', 'Success')->where('cancelled_at', null)->doesntExist()){
+                        $isValidUser = true;
+                    } else {
+                        $isValidUser = false;
+                    }
+                }
+
+                if($isValidUser){
+
+                    if($request->rate_total >= $offer->minimum_purchase_amount){
+
+                        if($offer->ticket_size == 0 || $offer->actual_ticket_size < $offer->ticket_size){
+
+                            if($offer->ticket_per_day == 0 || $offer->actual_ticket_per_day < $offer->ticket_per_day){
+
+                                if($offer->ticket_per_customer == 0 || $offer->actual_ticket_per_customer < $offer->ticket_per_customer){
+
+                                    if($offer->ticket_per_customer_per_day == 0 || $offer->actual_ticket_per_customer_per_day < $offer->ticket_per_customer_per_day){
+
+                                        $response["data"] = $offer;
+                                        $response["message"] = "Offer Applied";
+
+                                    } else {
+                                        $response["message"] = "You already have used this offer today.";
+                                    }
+
+                                } else {
+                                    $response["message"] = "You already have used this offer.";
+                                }
+
+                            } else {
+                                $response["message"] = "Offer Closed For The Day.";
+                            }
+
+                        } else {
+                            $response["message"] = "Offer Closed.";
+                        }
+
+                    } else {
+                        /* Minimum order amount */
+                        $response["message"] = "Offer only valid for purchase of Rs.".$offer->minimum_purchase_amount."/- and above.";
+                    }
+
+                } else {
+                    /* Not Valid User */
+                    $response["message"] = "This offer is not valid for you.";
+                }
+
+            } else {
+                /* Not Valid for Today */
+                $response["message"] = "Coupon not valid for today.";
+            }
+
+        } else {
+            /* If Coupon Doesn't Exist */
+            $response["message"] = "Invalid Coupon.";
+        }
+
+        return $response;
     }
 }

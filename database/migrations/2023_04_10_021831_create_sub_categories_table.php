@@ -21,6 +21,10 @@ class CreateSubCategoriesTable extends Migration
             $table->string('sub_category');
             $table->text('media')->nullable();
 
+            $table->string('title')->nullable();
+            $table->text('keywords')->nullable();
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }

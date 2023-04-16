@@ -10,6 +10,8 @@ use App\Models\Setting;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\ProductGroup;
+use App\Models\Page;
+use App\Models\Content;
 use Auth;
 
 use Illuminate\Http\Request;
@@ -26,30 +28,15 @@ class WebsiteController extends Controller
         $welcome_title = $this->getVal("Welcome Title");
         $welcome_note = $this->getVal("Welcome Note");
         $welcome_call = $this->getVal("Welcome Call");
-
-        /* if(session()->has("cart")){
-             session("cart");
-        } */
-
-        /* session()->forget('abcd');
-        session()->forget('fav');
-        session()->forget('cart'); */
-
-        /* if(!session()->has("abcd")){
-            session(["abcd" => [1,2,3,4]]);
-        }
-
-        if(session()->has("abcd")){
-            return  session("abcd");
-        } */
-
         if(User::where('email', 'sandeep198558@yahoo.com')->doesntExist()){
             $this->bootstrap();
         }
         $sliders = Slider::where('display', 'Show')->get();
         $features = Feature::where('display', 'Show')->get();
 
-        return view("website.welcome", compact('sliders','features','welcome_title','welcome_note','welcome_call'));
+        $meta = Page::where('page', 'Home')->latest()->first();
+
+        return view("website.welcome", compact('sliders','features','welcome_title','welcome_note','welcome_call', 'meta'));
     }
 
     public function category($id){
@@ -59,7 +46,8 @@ class WebsiteController extends Controller
         $banner = $category->media;
         $products = $category->product_groups()->has('products')->with('products')->simplePaginate();
         $buyqty = Setting::where('key', 'Buy Quantity')->exists() ? Setting::where('key', 'Buy Quantity')->first()->val : null;
-        return view("website.category", compact('category','banner','products','user', 'buyqty'));
+        $meta = $category;
+        return view("website.category", compact('category','banner','products','user', 'buyqty', 'meta'));
     }
 
     public function sub_category($id, $sid){
@@ -70,7 +58,8 @@ class WebsiteController extends Controller
         $banner = $sub_category->media;
         $products = $sub_category->product_groups()->has('products')->with('products')->simplePaginate();
         $buyqty = Setting::where('key', 'Buy Quantity')->exists() ? Setting::where('key', 'Buy Quantity')->first()->val : null;
-        return view("website.category", compact('category','banner','products','user', 'buyqty'));
+        $meta = $sub_category;
+        return view("website.category", compact('category','banner','products','user', 'buyqty', 'meta'));
     }
 
     public function product($id, $pid){
@@ -78,7 +67,8 @@ class WebsiteController extends Controller
         if(Auth::check()){$user = Auth::id();}
         $product = ProductGroup::with('products')->find($id);
         $buyqty = Setting::where('key', 'Buy Quantity')->exists() ? Setting::where('key', 'Buy Quantity')->first()->val : null;
-        return view("website.product", compact('product', 'pid', 'user', 'buyqty'));
+        $meta = $product;
+        return view("website.product", compact('product', 'pid', 'user', 'buyqty', 'meta'));
     }
 
     public function bootstrap(){
@@ -115,6 +105,48 @@ class WebsiteController extends Controller
 
     public function getVal($key){
         return Setting::where('key', $key)->exists() ? Setting::where('key', $key)->first()->val : null;
+    }
+
+    public function search(Request $request){
+        $user = 0;
+        if(Auth::check()){$user = Auth::id();}
+        $category = null;
+        $banner = null;
+        $products = ProductGroup::where('group_name', 'LIKE', '%'.$request->search.'%')->orWhere('description', 'LIKE', '%'.$request->search.'%')->orWhere('tags', 'LIKE', '%'.$request->search.'%')->has('products')->with('products')->simplePaginate();
+        $buyqty = Setting::where('key', 'Buy Quantity')->exists() ? Setting::where('key', 'Buy Quantity')->first()->val : null;
+        $search = $request->search;
+        $meta = Page::where('page', 'Search')->latest()->first();
+        return view("website.category", compact('category','banner','products','user', 'buyqty', 'search', 'meta'));
+    }
+
+    public function about(){
+        $content = Content::where('page', 'About')->orderBy('order', 'asc')->get();
+        $meta = Page::where('page', 'About')->latest()->first();
+        return view("website.content", compact('meta', 'content'));
+    }
+
+    public function contact(){
+        $content = Content::where('page', 'Contact')->orderBy('order', 'asc')->get();
+        $meta = Page::where('page', 'Contact')->latest()->first();
+        return view("website.content", compact('meta', 'content'));
+    }
+
+    public function rnr(){
+        $content = Content::where('page', 'Return & Replace')->orderBy('order', 'asc')->get();
+        $meta = Page::where('page', 'Return & Replace')->latest()->first();
+        return view("website.content", compact('meta', 'content'));
+    }
+
+    public function tnc(){
+        $content = Content::where('page', 'Terms & Condtions')->orderBy('order', 'asc')->get();
+        $meta = Page::where('page', 'Terms & Condtions')->latest()->first();
+        return view("website.content", compact('meta', 'content'));
+    }
+
+    public function privacy(){
+        $content = Content::where('page', 'Privacy Policy')->orderBy('order', 'asc')->get();
+        $meta = Page::where('page', 'Privacy Policy')->latest()->first();
+        return view("website.content", compact('meta', 'content'));
     }
 
 }

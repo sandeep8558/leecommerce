@@ -21,7 +21,7 @@ class Purchase extends Model
     ];
 
     public function product(){
-        return $this->belongsTo("App\models\Product");
+        return $this->belongsTo("App\Models\Product");
     }
 
     protected $appends = ['data_product'];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Page;
 
 class WishListController extends Controller
 {
@@ -17,7 +18,8 @@ class WishListController extends Controller
         $user = 0;
         if(Auth::check()){$user = Auth::id();}
         $wishlists = Auth::user()->wish_lists()->with('product')->get();
-        return view("website.wishlist", compact("wishlists", "user"));
+        $meta = Page::where('page', 'Wishlist')->latest()->first();
+        return view("website.wishlist", compact("wishlists", "user", "meta"));
     }
 
     public function add(Request $request){

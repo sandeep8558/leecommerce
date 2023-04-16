@@ -112,6 +112,26 @@
             Theme Color
             <span class="float-right"><toggle-switch :datawhat="'text'" :dataoptions="[]" :datavalue="'#000000'" :datakey="'Theme Color'"></toggle-switch></span>
         </li>
+
+        <li class="list-group-item p-0 py-3">
+            Facebook
+            <span class="float-right"><toggle-switch :datawhat="'text'" :dataoptions="[]" :datavalue="'https://facebook.com'" :datakey="'Facebook'"></toggle-switch></span>
+        </li>
+
+        <li class="list-group-item p-0 py-3">
+            Instagram
+            <span class="float-right"><toggle-switch :datawhat="'text'" :dataoptions="[]" :datavalue="'https://instagram.com'" :datakey="'Instagram'"></toggle-switch></span>
+        </li>
+
+        <li class="list-group-item p-0 py-3">
+            Youtube
+            <span class="float-right"><toggle-switch :datawhat="'text'" :dataoptions="[]" :datavalue="'https://youtube.com'" :datakey="'Youtube'"></toggle-switch></span>
+        </li>
+
+        <li class="list-group-item p-0 py-3">
+            Enter WhatsApp Mobile No
+            <span class="float-right"><toggle-switch :datawhat="'text'" :dataoptions="[]" :datavalue="'0000000000'" :datakey="'WhatsApp'"></toggle-switch></span>
+        </li>
     </ul>
 </div>
 </template>

@@ -12,7 +12,7 @@
         <h2>&#8377;{{ myWishlist.product.rate }} <del class="fs-6 text-danger">MRP &#8377;{{ myWishlist.product.mrp }}</del></h2>
     </div>
     <div class="col-auto">
-        <button @click="removeProduct()" class="btn btn-danger">Remove for wishlist</button>
+        <button @click="removeProduct()" class="btn btn-danger">Remove from wishlist</button>
     </div>
 </div>
 </template>

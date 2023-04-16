@@ -110,11 +110,28 @@
             </div>
             <div class="col-10 col-lg-4 mb-4">
                 <ul class="list-group list-group-flush">
+                    
+                    <li class="list-group-item text-bg-primary p-3">
+                        <div class="input-group">
+                            <input type="text" id="coupon" name="coupon" v-model="coupon" class="form-control shadow-none text-uppercase" placeholder="COUPON CODE">
+                            <button @click="checkCoupon()" class="btn btn-dark" type="button" id="button-addon2">APPLY</button>
+                        </div>
+                    </li>
+
+                    <li v-if="coupon_message != null && coupon_message != '' && offer_id == null" class="list-group-item text-bg-danger">
+                        {{ coupon_message }}
+                    </li>
+
+                    <li v-if="coupon_message != null && coupon_message != '' && offer_id != null" class="list-group-item text-bg-success">
+                        {{ coupon_message }}
+                    </li>
+
                     <li class="list-group-item">MRP Total <span class="float-right">{{ calc.mrp_total }}</span></li>
                     <li class="list-group-item">Cost Total <span class="float-right">{{ calc.cost_total }}</span></li>
                     <li class="list-group-item">Tax Total <span class="float-right">{{ calc.tax_total }}</span></li>
                     <li class="list-group-item">Rate Total <span class="float-right">{{ calc.rate_total }}</span></li>
                     <li class="list-group-item">Discount <span class="float-right">{{ calc.discount }}</span></li>
+                    <li class="list-group-item">Offer Discount <span class="float-right">{{ calc.offer_discount }}</span></li>
                     <li class="list-group-item">Delivery Charges <span class="float-right">{{ calc.delivery_charges }}</span></li>
                     <li class="list-group-item fw-bold">Payable <span class="float-right">{{ calc.payable }}</span></li>
 
@@ -142,6 +159,9 @@ export default {
 
     data: function (){
         return {
+            offer_id: null,
+            coupon: null,
+            coupon_message: null,
             order_id: null,
             id: 0,
             products: [],
@@ -191,6 +211,31 @@ export default {
 
     methods : {
 
+        checkCoupon(){
+            this.offer_id = null;
+            this.coupon_message = null;
+
+            if(this.coupon != null && this.coupon != ''){
+                this.coupon_message = null;
+                let data = {
+                    coupon: this.coupon,
+                    rate_total: this.calc.rate_total,
+                };
+                window.axios.post("/checkout/check/coupon", data).then(res => {
+                    this.coupon_message = res.data.message;
+                    if(res.data.data != null){
+                        this.offer_id = res.data.data.id;
+                    }
+                    this.getCart();
+                    console.log(res.data.data);
+                });
+
+            } else {
+                this.coupon_message = "Please Enter Coupon Code."
+                $("#coupon").focus();
+            }
+        },
+
         success(res){
             let data = {
                 razorpay_payment_id: res.razorpay_payment_id,
@@ -234,6 +279,7 @@ export default {
             });
             let order = {
                 address_id: this.id,
+                offer_id: this.offer_id,
                 mrp_total:this.calc.mrp_total,
                 cost_total:this.calc.cost_total,
                 tax_total:this.calc.tax_total,
@@ -345,7 +391,11 @@ export default {
         },
 
         getCart(){
-            window.axios.get("/cart/get_cart").then(res => {
+            let url = "/cart/get_cart";
+            if(this.offer_id != null) {
+                url += "?offer_id="+this.offer_id;
+            }
+            window.axios.get(url).then(res => {
                 this.respond(res);
             });
         },

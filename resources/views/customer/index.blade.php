@@ -12,15 +12,15 @@
             @switch($role->role)
 
                 @case("Administrator")
-                    <a class="btn btn-dark" href="/administrator">Administrator</a>
+                    <a class="btn btn-dark" target="_blank" href="/administrator">Administrator</a>
                 @break
 
                 @case("Web-Admin")
-                    <a class="btn btn-dark" href="/webadmin">Web-Admin</a>
+                    <a class="btn btn-dark" target="_blank" href="/webadmin">Web-Admin</a>
                 @break
 
                 @case("Store Manager")
-                    <a class="btn btn-dark" href="/storemanager">Store Manager</a>
+                    <a class="btn btn-dark" target="_blank" href="/storemanager">Store Manager</a>
                 @break
             
             @endswitch
@@ -32,7 +32,7 @@
 <div class="container my-4">
     {{ $orders->links() }}
 </div>
-
+@if(sizeof($orders) > 0)
 <div class="container py-2">
     <span class="d-block fs-3"><strong>Order ID:</strong> {{ $orders[0]->id }}</span>
     <span class="d-block fs-6"><strong>Order Placed at:</strong> {{ $orders[0]->created_at }}</span>
@@ -68,6 +68,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="container mt-3">
     @foreach($orders[0]->order_data as $order)
@@ -105,6 +106,8 @@
 
 @if($cancellation == 'Enable')
 <cancel-button order_id="{{$orders[0]->id}}" cancelled_at="{{$orders[0]->cancelled_at}}" shipped_at="{{$orders[0]->shipped_at}}"></cancel-button>
+@endif
+
 @endif
 
 <div class="container my-4">

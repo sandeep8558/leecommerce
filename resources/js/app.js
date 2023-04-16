@@ -39,6 +39,7 @@ $(document).ready(()=>{
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 
+    $("#search").focus();
     
 
 });
@@ -53,11 +54,14 @@ import AdminUserManager from './components/administrator/UserManager.vue';
 import AdminSettings from './components/administrator/Settings.vue';
 import AdminWebsiteManagerSlider from './components/administrator/website_manager/Slider.vue';
 import AdminWebsiteManagerFeatures from './components/administrator/website_manager/Features.vue';
+import AdminWebsiteManagerPages from './components/administrator/website_manager/Pages.vue';
+import AdminWebsiteManagerContent from './components/administrator/website_manager/Content.vue';
 import AdminProductsCategory from './components/administrator/products/Category.vue';
 import AdminProductsSubCategory from './components/administrator/products/SubCategory.vue';
 import AdminProductsProductGroup from './components/administrator/products/ProductGroup.vue';
 import AdminProductsProducts from './components/administrator/products/Products.vue';
 import AdminPurchase from './components/administrator/Purchase.vue';
+import AdminOffers from './components/administrator/Offers.vue';
 
 /* Elements */
 import Product from './components/elements/Product.vue';
@@ -75,11 +79,14 @@ const app = new Vue({
         AdminSettings,
         AdminWebsiteManagerSlider,
         AdminWebsiteManagerFeatures,
+        AdminWebsiteManagerPages,
+        AdminWebsiteManagerContent,
         AdminProductsCategory,
         AdminProductsSubCategory,
         AdminProductsProductGroup,
         AdminProductsProducts,
         AdminPurchase,
+        AdminOffers,
 
         Product,
         ProductDetail,

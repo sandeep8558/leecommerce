@@ -31,6 +31,10 @@ class CreateProductGroupsTable extends Migration
             $table->text('description')->nullable();
             $table->text('tags')->nullable();
 
+            $table->string('title')->nullable();
+            $table->text('keywords')->nullable();
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }
