@@ -12,6 +12,7 @@ use App\Models\SubCategory;
 use App\Models\ProductGroup;
 use App\Models\Page;
 use App\Models\Content;
+use App\Models\Offer;
 use Auth;
 
 use Illuminate\Http\Request;
@@ -33,10 +34,12 @@ class WebsiteController extends Controller
         }
         $sliders = Slider::where('display', 'Show')->get();
         $features = Feature::where('display', 'Show')->get();
+        $today = date('Y-m-d');
+        $offers = Offer::whereDate('start', '<=', $today)->whereDate('end', '>=', $today)->get();
 
         $meta = Page::where('page', 'Home')->latest()->first();
 
-        return view("website.welcome", compact('sliders','features','welcome_title','welcome_note','welcome_call', 'meta'));
+        return view("website.welcome", compact('sliders','features','welcome_title','welcome_note','welcome_call', 'meta', 'offers'));
     }
 
     public function category($id){

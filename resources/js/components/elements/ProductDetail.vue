@@ -81,7 +81,7 @@
                 <p>{{ product.brand }}</p>
                 <h2 class="my-0 fw-bold mb-2"> &#8377;{{ selectedProduct.rate }} <span class="text-danger" style="font-size: 14px;"><del>&#8377;{{ selectedProduct.mrp }}</del></span></h2>
 
-                <p><h5 class="mt-3">Product Detail:</h5>{{ product.description }}</p>
+                <p><h5 class="mt-3">Product Detail:</h5>{{ product.details }}</p>
 
                 <!-- <p>{{ selectedProduct.data_qty }}</p> -->
                 

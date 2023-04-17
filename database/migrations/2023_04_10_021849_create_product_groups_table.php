@@ -28,7 +28,7 @@ class CreateProductGroupsTable extends Migration
             $table->set('volume', ['No', 'Yes'])->default('No');
             $table->set('color', ['No', 'Yes'])->default('No');
             $table->set('size', ['No', 'Yes'])->default('No');
-            $table->text('description')->nullable();
+            $table->text('details')->nullable();
             $table->text('tags')->nullable();
 
             $table->string('title')->nullable();

@@ -262,19 +262,8 @@
                         <button @click="editData(item)" class="btn btn-sm shadow-none btn-outline-warning"><i class="fas fa-edit"></i></button>
                         <button @click="deleteData(item.id)" class="btn btn-sm shadow-none btn-outline-danger"><i class="fas fa-trash"></i></button>
                         <a v-if="formData.model=='ProductGroup'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/administrator/products/products/'+item.id" target="_blank"><i class="fas fa-link"></i></a>
-                        <a v-if="formData.model=='Supplier'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/purchase/supplier_manager/supplier_bank/'+item.id" target="_blank"><i class="fas fa-piggy-bank"></i></a>
-                        <a v-if="formData.model=='Supplier'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/purchase/supplier_manager/supplier_products/'+item.id" target="_blank"><i class="fas fa-boxes"></i></a>
-
-                        <a v-if="formData.model=='Employee'" class="btn shadow-none btn-outline-secondary btn-sm" :href="'/hr/employee/'+item.id" target="_blank"><i class="fas fa-user"></i></a>
+                        <a v-if="formData.model=='User'" class="btn shadow-none btn-outline-primary btn-sm" :href="'/administrator/user_manager/roles/'+item.id" target="_blank"><i class="fas fa-link"></i></a>
                     </td>
-
-                    <!-- <td v-if="formData.model=='Employee'" class="text-right ">
-                        <a class="btn shadow-none btn-outline-primary btn-sm" :href="'/hr/employee/id/'+item.id" target="_blank" title="ID card"><i class="fas fa-id-card-alt"></i></a>
-                        <a class="btn shadow-none btn-outline-primary btn-sm" :href="'/hr/employee/id/'+item.id" target="_blank" title="Offer Letter"><i class="fas fa-gift"></i></a>
-                        <a class="btn shadow-none btn-outline-primary btn-sm" :href="'/hr/employee/id/'+item.id" target="_blank" title="Appointment Letter"><i class="fas fa-calendar-check"></i></a>
-                        <a class="btn shadow-none btn-outline-primary btn-sm" :href="'/hr/employee/id/'+item.id" target="_blank" title="Experience Letter"><i class="fas fa-briefcase"></i></a>
-                        <a class="btn shadow-none btn-outline-primary btn-sm" :href="'/hr/employee/id/'+item.id" target="_blank" title="Termination Letter"><i class="fas fa-hand-paper"></i></a>
-                    </td> -->
 
                 </tr>
 

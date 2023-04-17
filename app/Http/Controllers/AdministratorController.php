@@ -6,15 +6,40 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\ProductGroup;
+use App\Models\Product;
 use App\Models\Order;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DNS2D;
 use DNS1D;
+use App\Charts\SampleChart;
 
 class AdministratorController extends Controller
 {
     public function index(){
-        return view("administrator.index");
+        $chart = new SampleChart;
+        $order = Order::where('orderstatus', 'Success');
+        $dashboard = [
+            "pending" => $order->where('accepted_at', null)->where('packed_at', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
+            "accepted" => $order->where('accepted_at', '!=', null)->where('packed_at', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
+            "packed" => $order->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
+            "shipped" => $order->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', '!=', null)->where('delivered_at', null)->count(),
+            "delivered" => $order->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', '!=', null)->where('delivered_at', '!=', null)->count(),
+            "customers" => User::count(),
+            "categories" => Category::count(),
+            "sub_categories" => SubCategory::count(),
+            "product_groups" => ProductGroup::count(),
+            "products" => Product::count(),
+        ];
+        return view("administrator.index", compact("chart", "dashboard"));
+    }
+
+    public function user_manager(){
+        return view("administrator.user_manager");
+    }
+
+    public function user_manager_roles($id){
+        return view("administrator.user_manager_roles", compact("id"));
     }
 
     public function website_manager_slider(){
@@ -144,10 +169,6 @@ class AdministratorController extends Controller
         $reverse = "Shipped";
         $title = "Delivered Orders";
         return view("administrator.orders.order", compact("orders", "title", "count", "forward", "reverse"));
-    }
-
-    public function user_manager(){
-        return view("administrator.user_manager");
     }
 
     public function forward($id, $what){

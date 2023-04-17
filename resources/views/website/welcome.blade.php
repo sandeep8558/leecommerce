@@ -83,5 +83,40 @@
 </div>
 
 
+<div class="container px-0">
+
+    <div id="OfferSlider" class="carousel slide">
+        <div class="carousel-indicators">
+            @foreach($offers as $i=>$offer)
+                <button type="button" data-bs-target="#OfferSlider" data-bs-slide-to="{{$i}}" class="{{$i==0 ? 'active' : ''}}" aria-current="{{$i==0 ? true : false}}" aria-label="Slide {{$i}}"></button>
+            @endforeach
+        </div>
+
+        <div class="carousel-inner">
+            @foreach($offers as $i=>$offer)
+                <div class="carousel-item {{$i==0 ? 'active' : ''}}">
+                    <a class="w-100" href="{{$offer->link}}">
+                        <div class="image image-l image-header-md">
+                            <img src="{{$offer->media}}" class="image-cover" alt="{{$offer->title}}">
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#OfferSlider" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#OfferSlider" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    
+    </div>
+
+</div>
+
+
 
 @endsection

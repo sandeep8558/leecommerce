@@ -18,7 +18,7 @@ class SampleChart extends Chart
         $this->labels(['One', 'Two', 'Three', 'Four']);
         $this->dataset('Purchase', 'line', [1,2,3,4])->color('red')->fill(true);
         $this->loaderColor('#000000');
-        $this->height(300);
+        $this->height(400);
         
     }
 

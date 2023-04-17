@@ -122,9 +122,20 @@
                         <div class="accordion-body">
                             <ul class="list-group list-group-flush bg-light d-grid p-0">
                                 <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/purchase')) ? 'fw-bold' : '' }}" href="/administrator/reports/purchase">Purchase</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/sale')) ? 'fw-bold' : '' }}" href="/administrator/reports/sale">Sale</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/invoices')) ? 'fw-bold' : '' }}" href="/administrator/reports/invoices">Invoices Wise Sale</a></li>
                             </ul>
                         </div>
                     </div>
+                </div>
+
+                <div class="accordion-item bg-primary">
+                    <h2 class="accordion-header" id="headingOne">
+                        <a href="/administrator/user_manager" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/user_manager')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                            User Manager
+                        </a>
+                    </h2>
                 </div>
 
                 <div class="accordion-item bg-primary">

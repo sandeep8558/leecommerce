@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Purchase;
 
 class OrderData extends Model
 {
@@ -23,5 +24,16 @@ class OrderData extends Model
 
     public function product(){
         return $this->belongsTo("App\Models\Product");
+    }
+
+    protected $appends = [
+        'purchase_amount'
+    ];
+
+    public function getPurchaseAmountAttribute(){
+        $p = Purchase::where('product_id', $this->product_id);
+        $count = $p->count();
+        $sum = $p->sum('rate');
+        return $this->qty * ($sum / $count);
     }
 }

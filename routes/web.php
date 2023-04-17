@@ -68,6 +68,8 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator/products/products/{id}', [App\Http\Controllers\AdministratorController::class, 'products_products']);
     Route::get('/administrator/purchase', [App\Http\Controllers\AdministratorController::class, 'purchase']);
     Route::get('/administrator/offers', [App\Http\Controllers\AdministratorController::class, 'offers']);
+    Route::get('/administrator/user_manager', [App\Http\Controllers\AdministratorController::class, 'user_manager']);
+    Route::get('/administrator/user_manager/roles/{id}', [App\Http\Controllers\AdministratorController::class, 'user_manager_roles']);
 
     Route::get('/administrator/orders/pending', [App\Http\Controllers\AdministratorController::class, 'pending']);
     Route::get('/administrator/orders/accepted', [App\Http\Controllers\AdministratorController::class, 'accepted']);
@@ -87,6 +89,8 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::post('/administrator/save_setting', [App\Http\Controllers\SettingController::class, 'save_setting']);
 
     Route::get('/administrator/reports/purchase', [App\Http\Controllers\ReportsController::class, 'purchase']);
+    Route::get('/administrator/reports/sale', [App\Http\Controllers\ReportsController::class, 'sale']);
+    Route::get('/administrator/reports/invoices', [App\Http\Controllers\ReportsController::class, 'invoices']);
 
 });
 

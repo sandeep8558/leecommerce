@@ -51,6 +51,7 @@ import vueDebounce from 'vue-debounce'
 Vue.use(vueDebounce)
 
 import AdminUserManager from './components/administrator/UserManager.vue';
+import AdminUserManagerRoles from './components/administrator/UserManagerRoles.vue';
 import AdminSettings from './components/administrator/Settings.vue';
 import AdminWebsiteManagerSlider from './components/administrator/website_manager/Slider.vue';
 import AdminWebsiteManagerFeatures from './components/administrator/website_manager/Features.vue';
@@ -76,6 +77,7 @@ const app = new Vue({
     el: '#app',
     components: {
         AdminUserManager,
+        AdminUserManagerRoles,
         AdminSettings,
         AdminWebsiteManagerSlider,
         AdminWebsiteManagerFeatures,

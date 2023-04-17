@@ -23,7 +23,7 @@ class ProductGroup extends Model
         "volume",
         "color",
         "size",
-        "description",
+        "details",
         "tags",
         "title",
         "keywords",

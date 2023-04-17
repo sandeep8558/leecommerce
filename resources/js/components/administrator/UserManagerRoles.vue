@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid p-0">
-        <lits-form :formData="formData"></lits-form>
+        <lits-form :formData="formData" @OnChange="change($event)"></lits-form>
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import LitsForm from '../form/NewForm.vue'
 export default {
 
-    props: ['id'],
+    props: ['id', 'user_id'],
 
     components: {
         LitsForm,
@@ -18,12 +18,12 @@ export default {
         return {
             formData : {
                 id : 0,
-                title : "User Manager",
-                formName : "UserForm",
-                model : "User",
+                title : "Role Manager",
+                formName : "RoleForm",
+                model : "Role",
                 action : "CRUD", /* CRUD | EDIT | SEARCH */
                 method : "",
-                custom_query : [],
+                custom_query : ['user_id', '==', this.user_id],
                 with : [],
                 mail : {
                     name : "Sandeep Rathod",
@@ -44,81 +44,76 @@ export default {
                     isLoadMore : true,
                 },
                 display : [
-                    { key : 'name', val : 'Name', type : 'text' },
-                    { key : 'mobile', val : 'Mobile', type : 'text' },
-                    { key : 'email', val : 'Email', type : 'text' },
+                    { key : 'user_id', val : 'User ID', type : 'text' },
+                    { key : 'role', val : 'Role', type : 'text' },
+                    { key : 'status', val : 'Status', type : 'text' },
                 ],
                 elements : [
 
                     {
-                        label : 'Full Name',
-                        name : 'name',
+                        label : 'User ID',
+                        name : 'user_id',
                         value : '',
                         values : [],
                         ObjectValue : {},
                         options : [],
-                        placeholder : 'Enter Full Name',
+                        placeholder : 'Enter User ID',
                         type : 'text',
                         validation : 'required | string',
-                        class : 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-3',
+                        class : 'col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3',
                         labelClass : '',
-                        hint : 'Please Enter Full Name',
+                        hint : 'Please Enter User ID',
+                        error : '',
+                        isError : false,
+                        readonly : true,
+                    },
+                    {
+                        label : 'Status',
+                        name : 'status',
+                        value : '',
+                        values : [],
+                        ObjectValue : {},
+                        options : [
+                            { key : 'Select Status', value : '' },
+                            { key : 'Active', value : 'Active' },
+                            { key : 'Non-Active', value : 'Non-Active' },
+                            { key : 'Block', value : 'Block' },
+                            { key : 'Hold', value : 'Hold' },
+                            { key : 'Discontinue', value : 'Discontinue' },
+                        ],
+                        placeholder : 'Please Select Status',
+                        type : 'select',
+                        validation : 'required',
+                        class : 'col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3',
+                        labelClass : '',
+                        hint : 'Please Select Status',
                         error : '',
                         isError : false,
                         readonly : false,
                     },
                     {
-                        label : 'Mobile',
-                        name : 'mobile',
+                        label : 'Role',
+                        name : 'role',
                         value : '',
                         values : [],
                         ObjectValue : {},
-                        options : [],
-                        placeholder : 'Enter Mobile',
-                        type : 'text',
-                        validation : 'required | string',
-                        class : 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-3',
+                        options : [
+                            { key : 'Select Role', value : '' },
+                            { key : 'Administrator', value : 'Administrator' },
+                            { key : 'Web-Admin', value : 'Web-Admin' },
+                            { key : 'Store Manager', value : 'Store Manager' },
+                            { key : 'Customer', value : 'Customer' },
+                        ],
+                        placeholder : 'Please Select Role',
+                        type : 'select',
+                        validation : 'required',
+                        class : 'col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-3',
                         labelClass : '',
-                        hint : 'Please Enter Mobile',
+                        hint : 'Please Select Role',
                         error : '',
                         isError : false,
                         readonly : false,
                     },
-                    {
-                        label : 'Email',
-                        name : 'email',
-                        value : '',
-                        values : [],
-                        ObjectValue : {},
-                        options : [],
-                        placeholder : 'Enter Email',
-                        type : 'text',
-                        validation : 'required | string',
-                        class : 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-3',
-                        labelClass : '',
-                        hint : 'Please Enter Email',
-                        error : '',
-                        isError : false,
-                        readonly : false,
-                    },
-                    {
-                        label : 'Password',
-                        name : 'password',
-                        value : '',
-                        values : [],
-                        ObjectValue : {},
-                        options : [],
-                        placeholder : 'Enter Password',
-                        type : 'text',
-                        validation : 'required | string',
-                        class : 'col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-3',
-                        labelClass : '',
-                        hint : 'Please Enter Password',
-                        error : '',
-                        isError : false,
-                        readonly : false,
-                    },
-
 
                 ],
             },
@@ -129,6 +124,7 @@ export default {
 
         change(e){
             /* console.log(e.target.value); */
+            this.formData.elements[0].value = this.user_id;
         },
 
         /* getBusinessPlan(){
