@@ -8630,6 +8630,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['delivery_timing', 'buyqty', 'delivery_charges', 'free_delivery_amount', 'minimum_order_amount'],
   components: {},
@@ -8705,6 +8706,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -47945,6 +47947,10 @@ var render = function() {
       _vm.products.length > 0
         ? _c("div", { staticClass: "col-10 col-lg-4 mb-4" }, [
             _c("ul", { staticClass: "list-group list-group-flush" }, [
+              _c("li", { staticClass: "list-group-item text-bg-warning" }, [
+                _vm._v(_vm._s(_vm.delivery_timing))
+              ]),
+              _vm._v(" "),
               _c("li", { staticClass: "list-group-item" }, [
                 _vm._v("MRP Total "),
                 _c("span", { staticClass: "float-right" }, [
@@ -48626,6 +48632,10 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
+          _c("li", { staticClass: "list-group-item text-bg-warning" }, [
+            _vm._v(_vm._s(_vm.delivery_timing))
+          ]),
+          _vm._v(" "),
           _c("li", { staticClass: "list-group-item" }, [
             _vm._v("MRP Total "),
             _c("span", { staticClass: "float-right" }, [
@@ -48840,8 +48850,6 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.selectedProduct.data_qty))]),
-          _vm._v(" "),
           _vm.product.size == "Yes"
             ? _c("div", { staticClass: "mb-2" }, [
                 _c(
@@ -49027,7 +49035,7 @@ var render = function() {
                   ? _c(
                       "span",
                       {
-                        staticClass: "badge rounded-pill bg-danger",
+                        staticClass: "badge rounded-pill text-bg-danger",
                         staticStyle: {
                           "font-size": "12px",
                           display: "inline-block",

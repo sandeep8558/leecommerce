@@ -32,6 +32,10 @@ Route::get('/rnr', [App\Http\Controllers\WebsiteController::class, 'rnr']);
 Route::get('/privacy', [App\Http\Controllers\WebsiteController::class, 'privacy']);
 
 
+Route::get('/dev', function(){
+    echo shell_exec("npm run dev");
+});
+
 
 Route::get('/notify/{title}/{msg}', [App\Http\Controllers\NotificationController::class, 'sendNotification'])->middleware("administrator");
 
@@ -68,6 +72,7 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator/products/products/{id}', [App\Http\Controllers\AdministratorController::class, 'products_products']);
     Route::get('/administrator/purchase', [App\Http\Controllers\AdministratorController::class, 'purchase']);
     Route::get('/administrator/offers', [App\Http\Controllers\AdministratorController::class, 'offers']);
+    Route::get('/administrator/theme', [App\Http\Controllers\AdministratorController::class, 'theme']);
     Route::get('/administrator/user_manager', [App\Http\Controllers\AdministratorController::class, 'user_manager']);
     Route::get('/administrator/user_manager/roles/{id}', [App\Http\Controllers\AdministratorController::class, 'user_manager_roles']);
 
@@ -76,6 +81,8 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator/orders/packed', [App\Http\Controllers\AdministratorController::class, 'packed']);
     Route::get('/administrator/orders/shipped', [App\Http\Controllers\AdministratorController::class, 'shipped']);
     Route::get('/administrator/orders/delivered', [App\Http\Controllers\AdministratorController::class, 'delivered']);
+    Route::get('/administrator/orders/cancelled', [App\Http\Controllers\AdministratorController::class, 'cancelled']);
+    Route::get('/administrator/orders/search', [App\Http\Controllers\AdministratorController::class, 'search']);
 
     Route::get('/administrator/order/{id}/forward/{what}', [App\Http\Controllers\AdministratorController::class, 'forward']);
     Route::get('/administrator/order/{id}/reverse/{what}', [App\Http\Controllers\AdministratorController::class, 'reverse']);

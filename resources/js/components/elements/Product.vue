@@ -17,7 +17,7 @@
             <h5 class="my-0 py-2">{{ selectedProduct.product_group.group_name }}</h5>
             <h2 class="my-0 fw-bold mb-2"> &#8377;{{ selectedProduct.rate }} <span class="text-danger" style="font-size: 14px;"><del>&#8377;{{ selectedProduct.mrp }}</del></span></h2>
 
-            <p>{{ selectedProduct.data_qty }}</p>
+            <!-- <p>{{ selectedProduct.data_qty }}</p> -->
             
             <div v-if="product.size == 'Yes'" class="mb-2">
                 <div class="btn-group">
@@ -53,7 +53,7 @@
             <div class="col-auto">
                 <button @click="addToCart()" type="button" :class="[(selectedProduct.data_qty <= 0 ? 'disabled' : '')]" class="btn btn-clear py-0 px-1 position-relative" style="font-size: 22px; border: 0;">
                     <i class="fas fa-shopping-cart"></i>
-                    <span v-if="selectedProduct.data_cart > 0" class="badge rounded-pill bg-danger" style="font-size: 12px; display: inline-block; left: -5px; top: -15px;">{{ selectedProduct.data_cart }}</span>
+                    <span v-if="selectedProduct.data_cart > 0" class="badge rounded-pill text-bg-danger" style="font-size: 12px; display: inline-block; left: -5px; top: -15px;">{{ selectedProduct.data_cart }}</span>
                 </button>
                 
                 <button @click="buy()" :class="[(selectedProduct.data_qty <= 0 ? 'disabled' : '')]" type="button" class="btn btn-primary">Buy</button>

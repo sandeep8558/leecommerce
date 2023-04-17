@@ -13,6 +13,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use DNS2D;
 use DNS1D;
 use App\Charts\SampleChart;
+use App\Models\Setting;
+use Storage;
 
 class AdministratorController extends Controller
 {
@@ -171,6 +173,37 @@ class AdministratorController extends Controller
         return view("administrator.orders.order", compact("orders", "title", "count", "forward", "reverse"));
     }
 
+    public function cancelled(){
+        $o = Order::
+        where('orderstatus', 'Pending')
+        ->orWhere('orderstatus', 'Cancelled')
+        ->orderBy('id', 'asc');
+        $count = $o->count();
+        $orders = $o->simplePaginate(1);
+        $forward = null;
+        $reverse = null;
+        $title = "Cancelled and Pending Orders";
+        return view("administrator.orders.order", compact("orders", "title", "count", "forward", "reverse"));
+    }
+
+    public function search(Request $request){
+        $id = 0;
+        if(isset($request->id)){
+            $id = $request->id;
+        }
+        
+        $o = Order::
+        where('id', $id)
+        ->orderBy('id', 'asc');
+
+        $count = $o->count();
+        $orders = $o->simplePaginate(1);
+        $forward = null;
+        $reverse = null;
+        $title = "Search order ";
+        return view("administrator.orders.order", compact("orders", "title", "count", "forward", "reverse", "id"));
+    }
+
     public function forward($id, $what){
         $timestamp = date('Y-m-d H:i:s');
         $data = [];
@@ -256,4 +289,28 @@ class AdministratorController extends Controller
     public function offers(){
         return view("administrator.offers");
     }
+
+    public function theme(Request $request){
+
+        $t = "\$primary:".$request->primary.";\$secondary:".$request->secondary.";\$success:".$request->success.";\$info:".$request->info.";\$warning:".$request->warning.";\$danger:".$request->danger.";\$light:".$request->light.";\$dark:".$request->dark.";";
+        
+        $theme = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
+
+        if(isset($request->primary)){
+            Setting::where('key', 'Theme Color')->update([
+                "val" => json_encode($request->all())
+            ]);
+
+            $theme = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
+
+            shell_exec("echo " .$t. " > ../resources/sass/_variables.scss");
+            
+            shell_exec("npm run dev");
+        }
+
+        $theme = json_decode($theme);
+
+        return view("administrator.theme", compact("theme"));
+    }
+
 }

@@ -1,7 +1,7 @@
 @extends('layouts.administrator')
 
 @section('head')
-<title>Packed Orders</title>
+<title>{{$title}}</title>
 @endsection
 
 @section('content')
@@ -11,15 +11,25 @@
     <hr>
 </div>
 
+@if(isset($id))
+<div class="container-fluid px-4">
+    <form action="/administrator/orders/search" method="get">
+        <div class="input-group input-group-lg mb-3">
+            <input type="text" class="form-control" value="{{$id}}" name="id" placeholder="">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search Order</button>
+        </div>
+    </form>
+    <hr>
+</div>
+@endif
+
 @if(sizeof($orders) > 0)
-
-
-
 <div class="container-fluid px-4">
     <span class="d-block fs-3"><strong>Order ID:</strong> {{ $orders[0]->id }}</span>
     <span class="d-block fs-6"><strong>Order Placed at:</strong> {{ $orders[0]->created_at }}</span>
     <span class="fs-6"><strong>Delivery Address:</strong> {{ $orders[0]->address->name }} - ({{ $orders[0]->address->mobile }} | {{ $orders[0]->address->email }}): {{ $orders[0]->address->address }} {{ $orders[0]->address->city }} {{ $orders[0]->address->pincode }} {{ $orders[0]->address->state }} {{ $orders[0]->address->country }}</span>
     <span class="d-block fs-6"><strong>Payment Mode:</strong> {{ $orders[0]->paymentmode }}</span>
+    <span class="d-block fs-6"><strong>Order Status:</strong> {{ $orders[0]->orderstatus }}</span>
     <hr>
 </div>
 

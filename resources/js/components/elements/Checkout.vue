@@ -126,6 +126,7 @@
                         {{ coupon_message }}
                     </li>
 
+                    <li class="list-group-item text-bg-warning">{{ delivery_timing }}</li>
                     <li class="list-group-item">MRP Total <span class="float-right">{{ calc.mrp_total }}</span></li>
                     <li class="list-group-item">Cost Total <span class="float-right">{{ calc.cost_total }}</span></li>
                     <li class="list-group-item">Tax Total <span class="float-right">{{ calc.tax_total }}</span></li>

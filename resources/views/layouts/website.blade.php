@@ -72,7 +72,7 @@
                 <a class="btn btn-lg btn-primary rounded-0 border-bottom" style="border-radius: 10px 0 0 0 !important;" href="/search"><i class="fas fa-search"></i></a>
                 <a class="btn btn-lg btn-primary position-relative border-bottom" href="/cart">
 
-                    <span class="badge text-bg-danger position-absolute top-50 translate-middle {{(session()->has('cart') && sizeof(session('cart')) > 0) ? '' : 'd-none'}}" style="left: -5px;" id="myCart">{{ sizeof(session("cart")) }}</span>
+                    <span class="badge bg-danger position-absolute top-50 translate-middle {{(session()->has('cart') && sizeof(session('cart')) > 0) ? '' : 'd-none'}}" style="left: -5px;" id="myCart">{{ sizeof(session("cart")) }}</span>
 
                     <i class="fas fa-shopping-cart"></i></a>
                 <a class="btn btn-lg btn-primary border-bottom" href="/wishlist"><i class="fas fa-heart"></i></a>

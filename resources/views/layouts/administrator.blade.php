@@ -56,7 +56,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingWebsiteManager">
-                        <button class="accordion-button {{ (request()->is('administrator/website_manager*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWebsiteManager" aria-expanded="true" aria-controls="collapseWebsiteManager">
+                        <button class="accordion-button bg-light {{ (request()->is('administrator/website_manager*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWebsiteManager" aria-expanded="true" aria-controls="collapseWebsiteManager">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             Website Manager
                         </button>
@@ -75,7 +75,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingProductsManager">
-                        <button class="accordion-button {{ (request()->is('administrator/products*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProductsManager" aria-expanded="true" aria-controls="collapseProductsManager">
+                        <button class="accordion-button bg-light {{ (request()->is('administrator/products*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProductsManager" aria-expanded="true" aria-controls="collapseProductsManager">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             Products Manager
                         </button>
@@ -93,7 +93,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOrderssManager">
-                        <button class="accordion-button {{ (request()->is('administrator/orders*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrderssManager" aria-expanded="true" aria-controls="collapseOrderssManager">
+                        <button class="accordion-button bg-light {{ (request()->is('administrator/orders*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrderssManager" aria-expanded="true" aria-controls="collapseOrderssManager">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             Order Manager
                         </button>
@@ -106,6 +106,8 @@
                                 <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/packed')) ? 'fw-bold' : '' }}" href="/administrator/orders/packed">Packed</a></li>
                                 <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/shipped')) ? 'fw-bold' : '' }}" href="/administrator/orders/shipped">Shipped</a></li>
                                 <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/delivered')) ? 'fw-bold' : '' }}" href="/administrator/orders/delivered">Delivered</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/cancelled')) ? 'fw-bold' : '' }}" href="/administrator/orders/cancelled">Cancelled & Pending</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/search')) ? 'fw-bold' : '' }}" href="/administrator/orders/search">Search Order</a></li>
                             </ul>
                         </div>
                     </div>
@@ -113,7 +115,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingReports">
-                        <button class="accordion-button {{ (request()->is('administrator/reports*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="true" aria-controls="collapseReports">
+                        <button class="accordion-button bg-light {{ (request()->is('administrator/reports*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="true" aria-controls="collapseReports">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             Reports
                         </button>
@@ -134,6 +136,15 @@
                         <a href="/administrator/user_manager" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/user_manager')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             User Manager
+                        </a>
+                    </h2>
+                </div>
+
+                <div class="accordion-item bg-primary">
+                    <h2 class="accordion-header" id="headingOne">
+                        <a href="/administrator/theme" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/theme')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                            Theme Manager
                         </a>
                     </h2>
                 </div>
