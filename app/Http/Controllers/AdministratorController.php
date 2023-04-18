@@ -292,23 +292,33 @@ class AdministratorController extends Controller
 
     public function theme(Request $request){
 
-        $t = "\$primary:".$request->primary.";\$secondary:".$request->secondary.";\$success:".$request->success.";\$info:".$request->info.";\$warning:".$request->warning.";\$danger:".$request->danger.";\$light:".$request->light.";\$dark:".$request->dark.";";
         
-        $theme = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
 
         if(isset($request->primary)){
+
             Setting::where('key', 'Theme Color')->update([
                 "val" => json_encode($request->all())
             ]);
 
             $theme = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
 
-            shell_exec("echo " .$t. " > ../resources/sass/_variables.scss");
-            
-            shell_exec("npm run dev");
-        }
+            $theme = json_decode($theme);
 
-        $theme = json_decode($theme);
+            $t = '$primary:'.$theme->primary.';$secondary:'.$theme->secondary.';$success:'.$theme->success.';$info:'.$theme->info.';$warning:'.$theme->warning.';$danger:'.$theme->danger.';$light:'.$theme->light.';$dark:'.$theme->dark.';';
+
+            shell_exec("echo '$t' > ../resources/sass/_variables.scss");
+
+            shell_exec("npm run dev");
+
+            /* return "PTL"; */
+
+        } else {
+
+            $theme = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
+
+            $theme = json_decode($theme);
+
+        }
 
         return view("administrator.theme", compact("theme"));
     }

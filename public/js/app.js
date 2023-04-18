@@ -49219,7 +49219,7 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-bs-target": "#carouselExampleIndicators1",
-                    "data-bs-slide-to": "0",
+                    "data-bs-slide-to": "1",
                     "aria-label": "Slide 1",
                     "aria-current": "true"
                   }
@@ -49232,7 +49232,7 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-bs-target": "#carouselExampleIndicators1",
-                    "data-bs-slide-to": "1",
+                    "data-bs-slide-to": "2",
                     "aria-label": "Slide 2"
                   }
                 })
@@ -49244,7 +49244,7 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-bs-target": "#carouselExampleIndicators1",
-                    "data-bs-slide-to": "2",
+                    "data-bs-slide-to": "3",
                     "aria-label": "Slide 3"
                   }
                 })
@@ -49256,8 +49256,8 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-bs-target": "#carouselExampleIndicators1",
-                    "data-bs-slide-to": "2",
-                    "aria-label": "Slide 3"
+                    "data-bs-slide-to": "4",
+                    "aria-label": "Slide 4"
                   }
                 })
               : _vm._e(),
@@ -49268,8 +49268,8 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-bs-target": "#carouselExampleIndicators1",
-                    "data-bs-slide-to": "2",
-                    "aria-label": "Slide 3"
+                    "data-bs-slide-to": "5",
+                    "aria-label": "Slide 5"
                   }
                 })
               : _vm._e(),
@@ -49280,8 +49280,8 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-bs-target": "#carouselExampleIndicators1",
-                    "data-bs-slide-to": "2",
-                    "aria-label": "Slide 3"
+                    "data-bs-slide-to": "6",
+                    "aria-label": "Slide 6"
                   }
                 })
               : _vm._e()
