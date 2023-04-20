@@ -341,4 +341,12 @@ class AdministratorController extends Controller
         return view("administrator.theme", compact("theme"));
     }
 
+    public function update(){
+        $process = new Process(["git pull origin main"]);
+        $process->setTimeout(300);
+        $process->run();
+
+        return back();
+    }
+
 }
