@@ -50,51 +50,32 @@ Route::group(['middleware'=>['auth']], function(){
 
 /* Common Auth Routes */
 Route::group(['middleware'=>['auth']], function(){
+    
     Route::get('/common/print/product/{id}', [App\Http\Controllers\CommonController::class, 'product']);
+
+    Route::get('/administrator', [App\Http\Controllers\AdministratorController::class, 'index'])->name("administrator");
+
 });
 
 
 /* Administrator Routes */
 Route::group(['middleware'=>['auth', 'administrator']], function(){
-    Route::get('/administrator', [App\Http\Controllers\AdministratorController::class, 'index'])->name("administrator");
-    Route::get('/administrator/website_manager/slider', [App\Http\Controllers\AdministratorController::class, 'website_manager_slider']);
-    Route::get('/administrator/website_manager/features', [App\Http\Controllers\AdministratorController::class, 'website_manager_features']);
-    Route::get('/administrator/website_manager/pages', [App\Http\Controllers\AdministratorController::class, 'website_manager_pages']);
-    Route::get('/administrator/website_manager/content', [App\Http\Controllers\AdministratorController::class, 'website_manager_content']);
-    Route::get('/administrator/products/category', [App\Http\Controllers\AdministratorController::class, 'products_category']);
-    Route::get('/administrator/products/sub_category', [App\Http\Controllers\AdministratorController::class, 'products_sub_category']);
-    Route::get('/administrator/products/product_group', [App\Http\Controllers\AdministratorController::class, 'products_product_group']);
-    Route::get('/administrator/products/products/{id}', [App\Http\Controllers\AdministratorController::class, 'products_products']);
-    Route::get('/administrator/purchase', [App\Http\Controllers\AdministratorController::class, 'purchase']);
-    Route::get('/administrator/offers', [App\Http\Controllers\AdministratorController::class, 'offers']);
-    Route::get('/administrator/theme', [App\Http\Controllers\AdministratorController::class, 'theme']);
+
+    /* User Manager */
     Route::get('/administrator/user_manager', [App\Http\Controllers\AdministratorController::class, 'user_manager']);
     Route::get('/administrator/user_manager/roles/{id}', [App\Http\Controllers\AdministratorController::class, 'user_manager_roles']);
-
-    Route::get('/administrator/orders/pending', [App\Http\Controllers\AdministratorController::class, 'pending']);
-    Route::get('/administrator/orders/accepted', [App\Http\Controllers\AdministratorController::class, 'accepted']);
-    Route::get('/administrator/orders/packed', [App\Http\Controllers\AdministratorController::class, 'packed']);
-    Route::get('/administrator/orders/shipped', [App\Http\Controllers\AdministratorController::class, 'shipped']);
-    Route::get('/administrator/orders/delivered', [App\Http\Controllers\AdministratorController::class, 'delivered']);
-    Route::get('/administrator/orders/cancelled', [App\Http\Controllers\AdministratorController::class, 'cancelled']);
-    Route::get('/administrator/orders/search', [App\Http\Controllers\AdministratorController::class, 'search']);
-
-    Route::post('/administrator/order/save/shipping', [App\Http\Controllers\AdministratorController::class, 'shipping']);
-    Route::get('/administrator/order/{id}/forward/{what}', [App\Http\Controllers\AdministratorController::class, 'forward']);
-    Route::get('/administrator/order/{id}/reverse/{what}', [App\Http\Controllers\AdministratorController::class, 'reverse']);
-
-    Route::get('/administrator/print/{id}/label', [App\Http\Controllers\AdministratorController::class, 'label']);
-    Route::get('/administrator/print/{id}/receipt', [App\Http\Controllers\AdministratorController::class, 'receipt']);
-
-    /* Settings Routes */
+    
+    /* Settings */
     Route::get('/administrator/settings', [App\Http\Controllers\SettingController::class, 'settings']);
     Route::post('/administrator/get_setting', [App\Http\Controllers\SettingController::class, 'get_setting']);
     Route::post('/administrator/save_setting', [App\Http\Controllers\SettingController::class, 'save_setting']);
 
+    /* Reports */
     Route::get('/administrator/reports/purchase', [App\Http\Controllers\ReportsController::class, 'purchase']);
     Route::get('/administrator/reports/sale', [App\Http\Controllers\ReportsController::class, 'sale']);
     Route::get('/administrator/reports/invoices', [App\Http\Controllers\ReportsController::class, 'invoices']);
 
+    /* Analytics */
     Route::get('/administrator/analytics/orders', [App\Http\Controllers\GraphController::class, 'orders']);
     Route::get('/administrator/analytics/sale', [App\Http\Controllers\GraphController::class, 'sale']);
     Route::get('/administrator/analytics/purchase', [App\Http\Controllers\GraphController::class, 'purchase']);
@@ -108,13 +89,47 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
 
 /* Web-Admin Routes */
 Route::group(['middleware'=>['auth', 'webadmin']], function(){
-    Route::get('/webadmin', [App\Http\Controllers\WebAdminController::class, 'index'])->name("webadmin");
+    Route::get('/webadmin', [App\Http\Controllers\AdministratorController::class, 'index'])->name("webadmin");
+
+    /* Website Manager */
+    Route::get('/administrator/website_manager/slider', [App\Http\Controllers\AdministratorController::class, 'website_manager_slider']);
+    Route::get('/administrator/website_manager/features', [App\Http\Controllers\AdministratorController::class, 'website_manager_features']);
+    Route::get('/administrator/website_manager/pages', [App\Http\Controllers\AdministratorController::class, 'website_manager_pages']);
+    Route::get('/administrator/website_manager/content', [App\Http\Controllers\AdministratorController::class, 'website_manager_content']);
+
+    /* Products Manager */
+    Route::get('/administrator/products/category', [App\Http\Controllers\AdministratorController::class, 'products_category']);
+    Route::get('/administrator/products/sub_category', [App\Http\Controllers\AdministratorController::class, 'products_sub_category']);
+    Route::get('/administrator/products/product_group', [App\Http\Controllers\AdministratorController::class, 'products_product_group']);
+    Route::get('/administrator/products/products/{id}', [App\Http\Controllers\AdministratorController::class, 'products_products']);
+
+    /* Purchase */
+    Route::get('/administrator/purchase', [App\Http\Controllers\AdministratorController::class, 'purchase']);
+
+    /* Offers */
+    Route::get('/administrator/offers', [App\Http\Controllers\AdministratorController::class, 'offers']);
+
+    /* Theme */
+    Route::get('/administrator/theme', [App\Http\Controllers\AdministratorController::class, 'theme']);
 });
 
 
 /* Store Manager Routes */
 Route::group(['middleware'=>['auth', 'storemanager']], function(){
-    Route::get('/storemanager', [App\Http\Controllers\StoreManagerController::class, 'index'])->name("storemanager");
+    Route::get('/storemanager', [App\Http\Controllers\AdministratorController::class, 'index'])->name("storemanager");
+    /* Orders Manager */
+    Route::get('/administrator/orders/pending', [App\Http\Controllers\AdministratorController::class, 'pending']);
+    Route::get('/administrator/orders/accepted', [App\Http\Controllers\AdministratorController::class, 'accepted']);
+    Route::get('/administrator/orders/packed', [App\Http\Controllers\AdministratorController::class, 'packed']);
+    Route::get('/administrator/orders/shipped', [App\Http\Controllers\AdministratorController::class, 'shipped']);
+    Route::get('/administrator/orders/delivered', [App\Http\Controllers\AdministratorController::class, 'delivered']);
+    Route::get('/administrator/orders/cancelled', [App\Http\Controllers\AdministratorController::class, 'cancelled']);
+    Route::get('/administrator/orders/search', [App\Http\Controllers\AdministratorController::class, 'search']);
+    Route::post('/administrator/order/save/shipping', [App\Http\Controllers\AdministratorController::class, 'shipping']);
+    Route::get('/administrator/order/{id}/forward/{what}', [App\Http\Controllers\AdministratorController::class, 'forward']);
+    Route::get('/administrator/order/{id}/reverse/{what}', [App\Http\Controllers\AdministratorController::class, 'reverse']);
+    Route::get('/administrator/print/{id}/label', [App\Http\Controllers\AdministratorController::class, 'label']);
+    Route::get('/administrator/print/{id}/receipt', [App\Http\Controllers\AdministratorController::class, 'receipt']);
 });
 
 
@@ -130,7 +145,6 @@ View::composer(['*'], function($view){
     $instagram = Setting::where('key', 'Instagram')->exists() ? Setting::where('key', 'Instagram')->first()->val : null;
     $youtube = Setting::where('key', 'Youtube')->exists() ? Setting::where('key', 'Youtube')->first()->val : null;
     $whatsapp = Setting::where('key', 'WhatsApp')->exists() ? Setting::where('key', 'WhatsApp')->first()->val : null;
-
     $address = Setting::where('key', 'Address')->exists() ? Setting::where('key', 'Address')->first()->val : null;
     $support_email = Setting::where('key', 'Support Email')->exists() ? Setting::where('key', 'Support Email')->first()->val : null;
     $support_mobile = Setting::where('key', 'Support Mobile')->exists() ? Setting::where('key', 'Support Mobile')->first()->val : null;

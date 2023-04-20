@@ -26,7 +26,6 @@
 
             <div class="accordion" id="accordionExample">
 
-            
                 <div class="accordion-item bg-primary">
                     <h2 class="accordion-header" id="headingOne">
                         <a href="/administrator" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">

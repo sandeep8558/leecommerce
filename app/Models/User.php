@@ -60,6 +60,14 @@ class User extends Authenticatable
     }
 
     public function isWebAdmin(){
+        $is = $this->roles()
+        ->where(function($q){
+            $q
+            ->where('role', 'Web-Admin')
+            ->orWhere('role', 'Store Manager')
+            ->orWhere('role', 'Administrator');
+        })
+        ->where('status', 'Active')->exists();
         if($this->roles()->where('role', 'Web-Admin')->where('status', 'Active')->exists()){
             return true;
         }
@@ -67,14 +75,34 @@ class User extends Authenticatable
     }
 
     public function isStoreManager(){
-        if($this->roles()->where('role', 'Store Manager')->where('status', 'Active')->exists()){
+
+        $is = $this->roles()
+        ->where(function($q){
+            $q
+            ->where('role', 'Store Manager')
+            ->orWhere('role', 'Administrator');
+        })
+        ->where('status', 'Active')->exists();
+
+        if($is){
             return true;
         }
         return false;
     }
 
     public function isCustomer(){
-        if($this->roles()->where('role', 'Customer')->where('status', 'Active')->exists()){
+        
+        $is = $this->roles()
+        ->where(function($q){
+            $q
+            ->where('role', 'Customer')
+            ->orWhere('role', 'Store Manager')
+            ->orWhere('role', 'Web-Admin')
+            ->orWhere('role', 'Administrator');
+        })
+        ->where('status', 'Active')->exists();
+
+        if($is){
             return true;
         }
         return false;

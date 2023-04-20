@@ -21,7 +21,7 @@ class Administrator
             if(Auth::user()->isAdministrator()){
                 return $next($request);
             } else {
-                Auth::logout();
+                //Auth::logout();
             }
         }
         return redirect('/home');

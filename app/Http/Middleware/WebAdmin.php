@@ -21,7 +21,7 @@ class WebAdmin
             if(Auth::user()->isWebAdmin()){
                 return $next($request);
             } else {
-                Auth::logout();
+                //Auth::logout();
             }
         }
         return redirect('/home');
