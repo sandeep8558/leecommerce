@@ -342,10 +342,7 @@ class AdministratorController extends Controller
     }
 
     public function update(){
-        $process = new Process(["git pull origin main"]);
-        $process->setTimeout(300);
-        $process->run();
-
+        shell_exec('git pull origin main');
         return back();
     }
 
