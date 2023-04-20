@@ -54,7 +54,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/common/print/product/{id}', [App\Http\Controllers\CommonController::class, 'product']);
 
     Route::get('/administrator', [App\Http\Controllers\AdministratorController::class, 'index'])->name("administrator");
-    Route::get('/administrator/update', [App\Http\Controllers\AdministratorController::class, 'index'])->name("update");
+    Route::get('/administrator/update', [App\Http\Controllers\AdministratorController::class, 'update']);
 
 });
 
