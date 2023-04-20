@@ -54,6 +54,8 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('r_delivered_by')->nullable();
             $table->timestamp('replace_at')->nullable();
             
+            $table->text('shipping')->nullable();
+
             $table->timestamp('cancelled_at')->nullable();
             $table->timestamp('payment_at')->nullable();
             $table->string('razorpay_payment_id')->nullable();

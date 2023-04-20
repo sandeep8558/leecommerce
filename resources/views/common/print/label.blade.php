@@ -45,7 +45,6 @@
         <!-- Header of Label -->
         <div class="header">
             <span class="fs-3 fw-bold">
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($logo))) }}" style="width:20px; vertical-align:top;">
                 {{$app_name}}
             </span>
         </div>
@@ -66,10 +65,6 @@
             <span class="">Rs {{$order->payable}}/-</span>
             <span class="fr">{{$order->paymentmode}}</span>
         </div>
-
-        <!-- <div style="clear:both;"></div> -->
-
-        <!-- <h1>{{$order->id}} {{$order->address->name}}</h1> -->
 
     </div>
 </body>

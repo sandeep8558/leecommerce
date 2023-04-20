@@ -51,7 +51,7 @@ class CartController extends Controller
         return session("cart");
     }
 
-    public function get_cart(Request $request){
+    public function get_cart(){
         $pids = [];
         $cart = session("cart");
         foreach($cart as $c){

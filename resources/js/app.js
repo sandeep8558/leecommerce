@@ -71,6 +71,7 @@ import Wishlist from './components/elements/Wishlist.vue';
 import Cart from './components/elements/Cart.vue';
 import Checkout from './components/elements/Checkout.vue';
 import CancelButton from './components/elements/CancelButton.vue';
+import Shipping from './components/elements/Shipping.vue';
 
 
 const app = new Vue({
@@ -96,5 +97,6 @@ const app = new Vue({
         Cart,
         Checkout,
         CancelButton,
+        Shipping,
     }
 });

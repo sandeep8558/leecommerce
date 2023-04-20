@@ -41,6 +41,7 @@ class Order extends Model
         "r_packed_by",
         "r_shipped_by",
         "r_delivered_by",
+        "shipping",
         "replace_at",
         "cancelled_at",
         "payment_at",

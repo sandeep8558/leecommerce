@@ -2,7 +2,6 @@
 
 @section('head')
 <title>Dashboard</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 @endsection
 
 @section('content')
@@ -103,17 +102,4 @@
     </div>
 </div>
 
-<!-- This is Chart Example -->
-<!-- <div class="container-fluid">
-{!! $chart->container() !!}
-</div> -->
-
-
-@endsection
-
-
-@section('scripts')
-@parent
-
-{!! $chart->script() !!}
 @endsection

@@ -14,12 +14,12 @@
                 </span>
 
                 <div class="carousel-indicators">
-                    <button v-if="selectedProduct.media_a != null && selectedProduct.media_a != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 1" class="active" aria-current="true"></button>
-                    <button v-if="selectedProduct.media_b != null && selectedProduct.media_b != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 2"></button>
-                    <button v-if="selectedProduct.media_c != null && selectedProduct.media_c != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="3" aria-label="Slide 3"></button>
-                    <button v-if="selectedProduct.media_d != null && selectedProduct.media_d != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="4" aria-label="Slide 4"></button>
-                    <button v-if="selectedProduct.media_e != null && selectedProduct.media_e != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="5" aria-label="Slide 5"></button>
-                    <button v-if="selectedProduct.media_f != null && selectedProduct.media_f != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="6" aria-label="Slide 6"></button>
+                    <button v-if="selectedProduct.media_a != null && selectedProduct.media_a != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" aria-label="Slide 0" class="active" aria-current="true"></button>
+                    <button v-if="selectedProduct.media_b != null && selectedProduct.media_b != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 1"></button>
+                    <button v-if="selectedProduct.media_c != null && selectedProduct.media_c != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 2"></button>
+                    <button v-if="selectedProduct.media_d != null && selectedProduct.media_d != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                    <button v-if="selectedProduct.media_e != null && selectedProduct.media_e != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="4" aria-label="Slide 4"></button>
+                    <button v-if="selectedProduct.media_f != null && selectedProduct.media_f != ''" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="5" aria-label="Slide 5"></button>
                 </div>
 
                 <div class="carousel-inner">

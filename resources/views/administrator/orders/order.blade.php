@@ -30,6 +30,7 @@
     <span class="fs-6"><strong>Delivery Address:</strong> {{ $orders[0]->address->name }} - ({{ $orders[0]->address->mobile }} | {{ $orders[0]->address->email }}): {{ $orders[0]->address->address }} {{ $orders[0]->address->city }} {{ $orders[0]->address->pincode }} {{ $orders[0]->address->state }} {{ $orders[0]->address->country }}</span>
     <span class="d-block fs-6"><strong>Payment Mode:</strong> {{ $orders[0]->paymentmode }}</span>
     <span class="d-block fs-6"><strong>Order Status:</strong> {{ $orders[0]->orderstatus }}</span>
+    <span class="d-block fs-6"><strong>Shipping Details:</strong> {{ $orders[0]->shipping }}</span>
     <hr>
 </div>
 
@@ -90,7 +91,12 @@
     <a class="btn btn-outline-dark ml-2" target="_blank" href="/administrator/print/{{$orders[0]->id}}/receipt">Receipt</a>
 
     @if($forward != null)
-    <a class="btn btn-outline-dark float-right mr-2" href="/administrator/order/{{$orders[0]->id}}/forward/{{$forward}}">{{$forward}}</a>
+        @if($forward != 'Shipped')
+            <a class="btn btn-outline-dark float-right mr-2" href="/administrator/order/{{$orders[0]->id}}/forward/{{$forward}}">{{$forward}}</a>
+        @endif
+        @if($forward == 'Shipped')
+            <shipping order_id="{{ $orders[0]->id }}" shipping="{{ $orders[0]->shipping }}"></shipping>
+        @endif
     @endif
     @if($reverse != null)
     <a class="btn btn-outline-dark float-right mr-2" href="/administrator/order/{{$orders[0]->id}}/reverse/{{$reverse}}">{{$reverse}}</a>

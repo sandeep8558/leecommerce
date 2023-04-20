@@ -12,28 +12,29 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DNS2D;
 use DNS1D;
-use App\Charts\SampleChart;
 use App\Models\Setting;
 use Storage;
 
+use App\Http\Controllers\GraphController;
+
+use Symfony\Component\Process\Process;
+
 class AdministratorController extends Controller
 {
-    public function index(){
-        $chart = new SampleChart;
-        $order = Order::where('orderstatus', 'Success');
+    public function index(Request $request){
         $dashboard = [
-            "pending" => $order->where('accepted_at', null)->where('packed_at', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
-            "accepted" => $order->where('accepted_at', '!=', null)->where('packed_at', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
-            "packed" => $order->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
-            "shipped" => $order->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', '!=', null)->where('delivered_at', null)->count(),
-            "delivered" => $order->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', '!=', null)->where('delivered_at', '!=', null)->count(),
+            "pending" => Order::where('orderstatus', 'Success')->where('accepted_at', null)->where('packed_at', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
+            "accepted" => Order::where('orderstatus', 'Success')->where('accepted_at', '!=', null)->where('packed_at', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
+            "packed" => Order::where('orderstatus', 'Success')->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', null)->where('delivered_at', null)->count(),
+            "shipped" => Order::where('orderstatus', 'Success')->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', '!=', null)->where('delivered_at', null)->count(),
+            "delivered" => Order::where('orderstatus', 'Success')->where('accepted_at', '!=', null)->where('packed_at', '!=', null)->where('shipped_at', '!=', null)->where('delivered_at', '!=', null)->count(),
             "customers" => User::count(),
             "categories" => Category::count(),
             "sub_categories" => SubCategory::count(),
             "product_groups" => ProductGroup::count(),
             "products" => Product::count(),
         ];
-        return view("administrator.index", compact("chart", "dashboard"));
+        return view("administrator.index", compact("dashboard"));
     }
 
     public function user_manager(){
@@ -164,7 +165,7 @@ class AdministratorController extends Controller
         ->where('packed_at', '!=', null)
         ->where('shipped_at', '!=', null)
         ->where('delivered_at', '!=', null)
-        ->orderBy('id', 'asc');
+        ->orderBy('id', 'desc');
         $count = $o->count();
         $orders = $o->simplePaginate(1);
         $forward = null;
@@ -204,6 +205,16 @@ class AdministratorController extends Controller
         return view("administrator.orders.order", compact("orders", "title", "count", "forward", "reverse", "id"));
     }
 
+    public function shipping(Request $request){
+        $timestamp = date('Y-m-d H:i:s');
+        $data = [
+            "shipped_at" => $timestamp,
+            "shipping" => $request->shipping
+        ];
+        $order = Order::find($request->order_id);
+        return $order = $order->update($data);
+    }
+
     public function forward($id, $what){
         $timestamp = date('Y-m-d H:i:s');
         $data = [];
@@ -225,7 +236,7 @@ class AdministratorController extends Controller
             break;
         }
         $order = Order::find($id);
-        $order->update($data);
+        $order = $order->update($data);
         return back();
     }
 
@@ -306,9 +317,16 @@ class AdministratorController extends Controller
 
             $t = '$primary:'.$theme->primary.';$secondary:'.$theme->secondary.';$success:'.$theme->success.';$info:'.$theme->info.';$warning:'.$theme->warning.';$danger:'.$theme->danger.';$light:'.$theme->light.';$dark:'.$theme->dark.';';
 
-            shell_exec("echo '$t' > ../resources/sass/_variables.scss");
+            $p = Process::fromShellCommandline("echo ".$t." > ../resources/sass/_variables.scss");
+            $p->setTimeout(300);
+            $p->run();
 
-            shell_exec("npm run dev");
+            //$process = Process::fromShellCommandline('npm run dev');
+            $process = new Process(["npm", "run", "dev"]);
+            $process->setTimeout(300);
+            $process->run();
+
+            //return shell_exec("/var/www/html/aiyanaa.com npm run prod");
 
             /* return "PTL"; */
 

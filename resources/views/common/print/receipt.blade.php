@@ -65,7 +65,6 @@
 
         <table class="my-0 mt-3 border-0">
             <tr>
-                <!-- <td class="py-1 w-12"><img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($logo))) }}" style="width:25px; vertical-align:top;"></td> -->
                 <td class="py-1 fs-5 text-center">{{$app_name}}</td>
             </tr>
         </table>
@@ -185,36 +184,6 @@
                 <td class="pt-4 fs-5 text-center">Thank you!</td>
             </tr>
         </table>
-
-        <!-- Header of Label -->
-        <!-- <div class="header">
-            <p class="fs-4 fw-bold mb-2">
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($logo))) }}" style="width:20px; vertical-align:top;">
-                {{$app_name}}
-            </p>
-            <p class="fs-2">{{$address}}</p>
-        </div>
-
-        <div class="address">
-            <span class="fs-2 fw-bold mb-1">{{$order->address->name}}</span>
-            <span class="fs-1 fw-normal">{{$order->address->address}} {{$order->address->city}} {{$order->address->pincode}} {{$order->address->state}} {{$order->address->country}} <br>
-            {{$order->address->mobile}} - {{$order->address->email}}</span>
-        </div>
-
-        <div class="order">
-            {!! $barcode !!}
-            <span class="fs-2">{{$order->id}}</span>
-            <span class="fs-2 fr">{{ date("d-m-Y", strtotime($order->created_at)) }}</span>
-        </div>
-
-        <div class="payment">
-            <span class="">Rs {{$order->payable}}/-</span>
-            <span class="fr">{{$order->paymentmode}}</span>
-        </div> -->
-
-        <!-- <div style="clear:both;"></div> -->
-
-        <!-- <h1>{{$order->id}} {{$order->address->name}}</h1> -->
 
     </div>
 </body>

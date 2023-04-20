@@ -32,11 +32,6 @@ Route::get('/rnr', [App\Http\Controllers\WebsiteController::class, 'rnr']);
 Route::get('/privacy', [App\Http\Controllers\WebsiteController::class, 'privacy']);
 
 
-Route::get('/dev', function(){
-    echo shell_exec("npm run dev");
-});
-
-
 Route::get('/notify/{title}/{msg}', [App\Http\Controllers\NotificationController::class, 'sendNotification'])->middleware("administrator");
 
 Auth::routes(['register' => true]);
@@ -84,6 +79,7 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator/orders/cancelled', [App\Http\Controllers\AdministratorController::class, 'cancelled']);
     Route::get('/administrator/orders/search', [App\Http\Controllers\AdministratorController::class, 'search']);
 
+    Route::post('/administrator/order/save/shipping', [App\Http\Controllers\AdministratorController::class, 'shipping']);
     Route::get('/administrator/order/{id}/forward/{what}', [App\Http\Controllers\AdministratorController::class, 'forward']);
     Route::get('/administrator/order/{id}/reverse/{what}', [App\Http\Controllers\AdministratorController::class, 'reverse']);
 
@@ -98,6 +94,14 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator/reports/purchase', [App\Http\Controllers\ReportsController::class, 'purchase']);
     Route::get('/administrator/reports/sale', [App\Http\Controllers\ReportsController::class, 'sale']);
     Route::get('/administrator/reports/invoices', [App\Http\Controllers\ReportsController::class, 'invoices']);
+
+    Route::get('/administrator/analytics/orders', [App\Http\Controllers\GraphController::class, 'orders']);
+    Route::get('/administrator/analytics/sale', [App\Http\Controllers\GraphController::class, 'sale']);
+    Route::get('/administrator/analytics/purchase', [App\Http\Controllers\GraphController::class, 'purchase']);
+    Route::get('/administrator/analytics/customers', [App\Http\Controllers\GraphController::class, 'customers']);
+    Route::get('/administrator/analytics/category', [App\Http\Controllers\GraphController::class, 'category']);
+    Route::get('/administrator/analytics/sub_category', [App\Http\Controllers\GraphController::class, 'sub_category']);
+    Route::get('/administrator/analytics/product', [App\Http\Controllers\GraphController::class, 'product']);
 
 });
 

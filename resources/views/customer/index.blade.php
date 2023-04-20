@@ -37,6 +37,7 @@
     <span class="d-block fs-3"><strong>Order ID:</strong> {{ $orders[0]->id }}</span>
     <span class="d-block fs-6"><strong>Order Placed at:</strong> {{ $orders[0]->created_at }}</span>
     <span class="d-block fs-6"><strong>Expected Delivery Time:</strong> {{ $delivery_timing }}</span>
+    <span class="d-block fs-6"><strong>Shipping Detail:</strong> {{ $orders[0]->shipping }}</span>
 </div>
 
 <div class="container py-2">

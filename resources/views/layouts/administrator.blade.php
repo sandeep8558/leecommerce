@@ -131,6 +131,28 @@
                     </div>
                 </div>
 
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAnalytics">
+                        <button class="accordion-button bg-light {{ (request()->is('administrator/analytics*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAnalytics" aria-expanded="true" aria-controls="collapseAnalytics">
+                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                            Analytics
+                        </button>
+                    </h2>
+                    <div id="collapseAnalytics" class="accordion-collapse collapse {{ (request()->is('administrator/analytics*')) ? 'show' : '' }}" aria-labelledby="headingAnalytics" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/orders')) ? 'fw-bold' : '' }}" href="/administrator/analytics/orders">Orders</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/sale')) ? 'fw-bold' : '' }}" href="/administrator/analytics/sale">Sale</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/purchase')) ? 'fw-bold' : '' }}" href="/administrator/analytics/purchase">Purchase</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/customers')) ? 'fw-bold' : '' }}" href="/administrator/analytics/customers">Customers</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/category')) ? 'fw-bold' : '' }}" href="/administrator/analytics/category">Category</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/sub_category')) ? 'fw-bold' : '' }}" href="/administrator/analytics/sub_category">Sub_category</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/product')) ? 'fw-bold' : '' }}" href="/administrator/analytics/product">Product</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="accordion-item bg-primary">
                     <h2 class="accordion-header" id="headingOne">
                         <a href="/administrator/user_manager" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/user_manager')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
