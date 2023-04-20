@@ -7,6 +7,8 @@
 @section('content')
 
 <div class="container-fluid p-4 mb-4 fs-3">
+
+Praise the Lord
     <div class="row justify-content-left">
         
         <div class="col-12 col-md-6 mb-2">
