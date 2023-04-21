@@ -14,8 +14,8 @@
         </a>
 
         <div class="px-3 py-2 text-left">
-            <h5 class="my-0 py-2">{{ selectedProduct.product_group.group_name }}</h5>
-            <h2 class="my-0 fw-bold mb-2"> &#8377;{{ selectedProduct.rate }} <span class="text-danger" style="font-size: 14px;"><del>&#8377;{{ selectedProduct.mrp }}</del></span></h2>
+            <p class="my-0 py-2">{{ selectedProduct.product_group.group_name }}</p>
+            <h2 class="my-0 mb-2"> &#8377;{{ selectedProduct.rate }} <span class="text-danger" style="font-size: 14px;"><del>&#8377;{{ selectedProduct.mrp }}</del></span></h2>
 
             <!-- <p>{{ selectedProduct.data_qty }}</p> -->
             
@@ -42,6 +42,8 @@
                     <button @click="switchProduct('volume', volume.volume)" class="btn btn-sm btn-outline-primary" v-for="volume in selectedProduct.data_volume" :key="volume.volume" :class="[(selectedProduct.volume == volume.volume ? 'active' : '')]">{{ volume.volume }}</button>
                 </div>
             </div>
+
+            <hr class="mb-0">
             
         </div>
 

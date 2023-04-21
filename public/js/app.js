@@ -9259,6 +9259,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['product', 'user', 'buyqty'],
   components: {},
@@ -48903,11 +48905,11 @@ var render = function() {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "px-3 py-2 text-left" }, [
-          _c("h5", { staticClass: "my-0 py-2" }, [
+          _c("p", { staticClass: "my-0 py-2" }, [
             _vm._v(_vm._s(_vm.selectedProduct.product_group.group_name))
           ]),
           _vm._v(" "),
-          _c("h2", { staticClass: "my-0 fw-bold mb-2" }, [
+          _c("h2", { staticClass: "my-0 mb-2" }, [
             _vm._v(" ₹" + _vm._s(_vm.selectedProduct.rate) + " "),
             _c(
               "span",
@@ -49034,7 +49036,9 @@ var render = function() {
                   0
                 )
               ])
-            : _vm._e()
+            : _vm._e(),
+          _vm._v(" "),
+          _c("hr", { staticClass: "mb-0" })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row p-2 text-left" }, [
