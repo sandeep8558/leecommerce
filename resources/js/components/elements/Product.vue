@@ -2,7 +2,7 @@
     <div v-if="selectedProduct != null" class="shadow rounded-4">
         
         <a class="btn btn-clear w-100 p-0" :href="'/product/' + product.id + '/' + selectedProduct.id">
-            <div class="image image-s rounded-top-4">
+            <div class="image image-s rounded-top-4 border-bottom">
                 <span :class="[(selectedProduct.data_qty <= 0 ? 'd-none' : 'd-block')]" class="px-2 py-1 rounded-lg fw-bold" style="position:absolute; margin: 10px 0 0 10px; z-index: 1; background-color: rgba(255,200,0,0.90); color: #000;">
                     {{ Math.round((selectedProduct.mrp - selectedProduct.rate) * 100 / selectedProduct.mrp) }}% OFF
                 </span>

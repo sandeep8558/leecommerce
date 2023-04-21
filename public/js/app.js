@@ -48846,61 +48846,65 @@ var render = function() {
             }
           },
           [
-            _c("div", { staticClass: "image image-s rounded-top-4" }, [
-              _c(
-                "span",
-                {
-                  staticClass: "px-2 py-1 rounded-lg fw-bold",
-                  class: [
-                    _vm.selectedProduct.data_qty <= 0 ? "d-none" : "d-block"
-                  ],
-                  staticStyle: {
-                    position: "absolute",
-                    margin: "10px 0 0 10px",
-                    "z-index": "1",
-                    "background-color": "rgba(255,200,0,0.90)",
-                    color: "#000"
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(
-                        Math.round(
-                          ((_vm.selectedProduct.mrp -
-                            _vm.selectedProduct.rate) *
-                            100) /
-                            _vm.selectedProduct.mrp
-                        )
-                      ) +
-                      "% OFF\n            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "px-2 py-1 rounded-lg fw-bold",
-                  class: [
-                    _vm.selectedProduct.data_qty <= 0 ? "d-bolck" : "d-none"
-                  ],
-                  staticStyle: {
-                    position: "absolute",
-                    margin: "10px 0 0 10px",
-                    "z-index": "1",
-                    "background-color": "rgba(255,0,0,0.90)",
-                    color: "#fff"
-                  }
-                },
-                [_vm._v("\n                Out of Stock\n            ")]
-              ),
-              _vm._v(" "),
-              _c("img", {
-                staticClass: "image-cover",
-                attrs: { src: _vm.selectedProduct.media_a, alt: "" }
-              })
-            ])
+            _c(
+              "div",
+              { staticClass: "image image-s rounded-top-4 border-bottom" },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "px-2 py-1 rounded-lg fw-bold",
+                    class: [
+                      _vm.selectedProduct.data_qty <= 0 ? "d-none" : "d-block"
+                    ],
+                    staticStyle: {
+                      position: "absolute",
+                      margin: "10px 0 0 10px",
+                      "z-index": "1",
+                      "background-color": "rgba(255,200,0,0.90)",
+                      color: "#000"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(
+                          Math.round(
+                            ((_vm.selectedProduct.mrp -
+                              _vm.selectedProduct.rate) *
+                              100) /
+                              _vm.selectedProduct.mrp
+                          )
+                        ) +
+                        "% OFF\n            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "px-2 py-1 rounded-lg fw-bold",
+                    class: [
+                      _vm.selectedProduct.data_qty <= 0 ? "d-bolck" : "d-none"
+                    ],
+                    staticStyle: {
+                      position: "absolute",
+                      margin: "10px 0 0 10px",
+                      "z-index": "1",
+                      "background-color": "rgba(255,0,0,0.90)",
+                      color: "#fff"
+                    }
+                  },
+                  [_vm._v("\n                Out of Stock\n            ")]
+                ),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "image-cover",
+                  attrs: { src: _vm.selectedProduct.media_a, alt: "" }
+                })
+              ]
+            )
           ]
         ),
         _vm._v(" "),
