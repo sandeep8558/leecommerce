@@ -63,7 +63,7 @@
         <hr>
         <p>{{ $welcome_call }}</p>
         <a class="btn btn-lg btn-primary mr-3" href="/register">Register Now!</a>
-        <a class="btn btn-lg btn-dark" href="/category/3">Shop Now!</a>
+        <a class="btn btn-lg btn-dark" href="/category/1">Shop Now!</a>
     </div>
 
 </div>
