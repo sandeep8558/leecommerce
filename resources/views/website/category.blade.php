@@ -25,9 +25,9 @@
     <div class="container py-2 submenus text-center">
         @if($category != null || $category != '')
         <div class="btn-group">
-            <a href="/category/{{$category->id}}" class="btn btn-outline-dark px-5 {{ (request()->is('category/'.$category->id)) ? 'active' : '' }}" aria-current="page">All</a>
+            <a href="/category/{{$category->id}}" class="btn btn-outline-dark ButtonLink px-5 {{ (request()->is('category/'.$category->id)) ? 'active' : '' }}" aria-current="page">All</a>
             @foreach($category->sub_categories as $i=>$sub)
-            <a href="/category/{{$category->id}}/sub_category/{{$sub->id}}" class="btn btn-outline-dark px-5 {{ (request()->is('category/'.$category->id.'/sub_category/'.$sub->id)) ? 'active' : '' }}" aria-current="page">{{$sub->sub_category}}</a>
+            <a href="/category/{{$category->id}}/sub_category/{{$sub->id}}" class="btn btn-outline-dark ButtonLink px-5 {{ (request()->is('category/'.$category->id.'/sub_category/'.$sub->id)) ? 'active' : '' }}" aria-current="page">{{$sub->sub_category}}</a>
             @endforeach
         </div>
         @endif
