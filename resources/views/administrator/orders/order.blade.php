@@ -1,5 +1,4 @@
 @extends('layouts.administrator')
-
 @section('head')
 <title>{{$title}}</title>
 @endsection

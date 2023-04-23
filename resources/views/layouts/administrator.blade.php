@@ -35,158 +35,163 @@
                     </h2>
                 </div>
 
-                <div class="accordion-item bg-primary">
-                    <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator/purchase" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/purchase')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Purchase
-                        </a>
-                    </h2>
-                </div>
+                @if(Auth::user()->roles()->where('role', 'Web-Admin')->exists())
 
-                <div class="accordion-item bg-primary">
-                    <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator/offers" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/offers')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Offers
-                        </a>
-                    </h2>
-                </div>
+                    <div class="accordion-item bg-primary">
+                        <h2 class="accordion-header" id="headingOne">
+                            <a href="/administrator/purchase" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/purchase')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Purchase
+                            </a>
+                        </h2>
+                    </div>
 
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingWebsiteManager">
-                        <button class="accordion-button bg-light {{ (request()->is('administrator/website_manager*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWebsiteManager" aria-expanded="true" aria-controls="collapseWebsiteManager">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Website Manager
-                        </button>
-                    </h2>
-                    <div id="collapseWebsiteManager" class="accordion-collapse collapse {{ (request()->is('administrator/website_manager*')) ? 'show' : '' }}" aria-labelledby="headingWebsiteManager" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/slider')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/slider">Slider Manager</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/features')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/features">Features Manager</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/pages')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/pages">Pages Manager</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/content')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/content">Content Manager</a></li>
-                            </ul>
+                    <div class="accordion-item bg-primary">
+                        <h2 class="accordion-header" id="headingOne">
+                            <a href="/administrator/offers" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/offers')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Offers
+                            </a>
+                        </h2>
+                    </div>
+
+                    <div class="accordion-item bg-primary">
+                        <h2 class="accordion-header" id="headingOne">
+                            <a href="/administrator/theme" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/theme')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Theme Manager
+                            </a>
+                        </h2>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingWebsiteManager">
+                            <button class="accordion-button bg-light {{ (request()->is('administrator/website_manager*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWebsiteManager" aria-expanded="true" aria-controls="collapseWebsiteManager">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Website Manager
+                            </button>
+                        </h2>
+                        <div id="collapseWebsiteManager" class="accordion-collapse collapse {{ (request()->is('administrator/website_manager*')) ? 'show' : '' }}" aria-labelledby="headingWebsiteManager" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/slider')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/slider">Slider Manager</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/features')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/features">Features Manager</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/pages')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/pages">Pages Manager</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/website_manager/content')) ? 'fw-bold' : '' }}" href="/administrator/website_manager/content">Content Manager</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingProductsManager">
-                        <button class="accordion-button bg-light {{ (request()->is('administrator/products*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProductsManager" aria-expanded="true" aria-controls="collapseProductsManager">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Products Manager
-                        </button>
-                    </h2>
-                    <div id="collapseProductsManager" class="accordion-collapse collapse {{ (request()->is('administrator/products*')) ? 'show' : '' }}" aria-labelledby="headingProductsManager" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/category')) ? 'fw-bold' : '' }}" href="/administrator/products/category">Category</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/sub_category')) ? 'fw-bold' : '' }}" href="/administrator/products/sub_category">Sub Category</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/product_group')) ? 'fw-bold' : '' }}" href="/administrator/products/product_group">Product Group</a></li>
-                            </ul>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingProductsManager">
+                            <button class="accordion-button bg-light {{ (request()->is('administrator/products*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProductsManager" aria-expanded="true" aria-controls="collapseProductsManager">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Products Manager
+                            </button>
+                        </h2>
+                        <div id="collapseProductsManager" class="accordion-collapse collapse {{ (request()->is('administrator/products*')) ? 'show' : '' }}" aria-labelledby="headingProductsManager" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/category')) ? 'fw-bold' : '' }}" href="/administrator/products/category">Category</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/sub_category')) ? 'fw-bold' : '' }}" href="/administrator/products/sub_category">Sub Category</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/products/product_group')) ? 'fw-bold' : '' }}" href="/administrator/products/product_group">Product Group</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOrderssManager">
-                        <button class="accordion-button bg-light {{ (request()->is('administrator/orders*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrderssManager" aria-expanded="true" aria-controls="collapseOrderssManager">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Order Manager
-                        </button>
-                    </h2>
-                    <div id="collapseOrderssManager" class="accordion-collapse collapse {{ (request()->is('administrator/orders*')) ? 'show' : '' }}" aria-labelledby="headingOrderssManager" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/pending')) ? 'fw-bold' : '' }}" href="/administrator/orders/pending">Pending</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/accepted')) ? 'fw-bold' : '' }}" href="/administrator/orders/accepted">Accepted</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/packed')) ? 'fw-bold' : '' }}" href="/administrator/orders/packed">Packed</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/shipped')) ? 'fw-bold' : '' }}" href="/administrator/orders/shipped">Shipped</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/delivered')) ? 'fw-bold' : '' }}" href="/administrator/orders/delivered">Delivered</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/cancelled')) ? 'fw-bold' : '' }}" href="/administrator/orders/cancelled">Cancelled & Pending</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/search')) ? 'fw-bold' : '' }}" href="/administrator/orders/search">Search Order</a></li>
-                            </ul>
+                @endif
+
+                @if(Auth::user()->roles()->where('role', 'Store Manager')->exists())
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOrderssManager">
+                            <button class="accordion-button bg-light {{ (request()->is('administrator/orders*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrderssManager" aria-expanded="true" aria-controls="collapseOrderssManager">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Order Manager
+                            </button>
+                        </h2>
+                        <div id="collapseOrderssManager" class="accordion-collapse collapse {{ (request()->is('administrator/orders*')) ? 'show' : '' }}" aria-labelledby="headingOrderssManager" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/pending')) ? 'fw-bold' : '' }}" href="/administrator/orders/pending">Pending</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/accepted')) ? 'fw-bold' : '' }}" href="/administrator/orders/accepted">Accepted</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/packed')) ? 'fw-bold' : '' }}" href="/administrator/orders/packed">Packed</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/shipped')) ? 'fw-bold' : '' }}" href="/administrator/orders/shipped">Shipped</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/delivered')) ? 'fw-bold' : '' }}" href="/administrator/orders/delivered">Delivered</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/cancelled')) ? 'fw-bold' : '' }}" href="/administrator/orders/cancelled">Cancelled & Pending</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/search')) ? 'fw-bold' : '' }}" href="/administrator/orders/search">Search Order</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingReports">
-                        <button class="accordion-button bg-light {{ (request()->is('administrator/reports*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="true" aria-controls="collapseReports">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Reports
-                        </button>
-                    </h2>
-                    <div id="collapseReports" class="accordion-collapse collapse {{ (request()->is('administrator/reports*')) ? 'show' : '' }}" aria-labelledby="headingReports" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/purchase')) ? 'fw-bold' : '' }}" href="/administrator/reports/purchase">Purchase</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/sale')) ? 'fw-bold' : '' }}" href="/administrator/reports/sale">Sale</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/invoices')) ? 'fw-bold' : '' }}" href="/administrator/reports/invoices">Invoices Wise Sale</a></li>
-                            </ul>
+                @endif
+
+                @if(Auth::user()->roles()->where('role', 'Administrator')->exists())
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingReports">
+                            <button class="accordion-button bg-light {{ (request()->is('administrator/reports*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="true" aria-controls="collapseReports">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Reports
+                            </button>
+                        </h2>
+                        <div id="collapseReports" class="accordion-collapse collapse {{ (request()->is('administrator/reports*')) ? 'show' : '' }}" aria-labelledby="headingReports" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/purchase')) ? 'fw-bold' : '' }}" href="/administrator/reports/purchase">Purchase</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/sale')) ? 'fw-bold' : '' }}" href="/administrator/reports/sale">Sale</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/invoices')) ? 'fw-bold' : '' }}" href="/administrator/reports/invoices">Invoices Wise Sale</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/reports/products')) ? 'fw-bold' : '' }}" href="/administrator/reports/products">Product Wise Sale</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingAnalytics">
-                        <button class="accordion-button bg-light {{ (request()->is('administrator/analytics*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAnalytics" aria-expanded="true" aria-controls="collapseAnalytics">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Analytics
-                        </button>
-                    </h2>
-                    <div id="collapseAnalytics" class="accordion-collapse collapse {{ (request()->is('administrator/analytics*')) ? 'show' : '' }}" aria-labelledby="headingAnalytics" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/orders')) ? 'fw-bold' : '' }}" href="/administrator/analytics/orders">Orders</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/sale')) ? 'fw-bold' : '' }}" href="/administrator/analytics/sale">Sale</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/purchase')) ? 'fw-bold' : '' }}" href="/administrator/analytics/purchase">Purchase</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/customers')) ? 'fw-bold' : '' }}" href="/administrator/analytics/customers">Customers</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/category')) ? 'fw-bold' : '' }}" href="/administrator/analytics/category">Category</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/sub_category')) ? 'fw-bold' : '' }}" href="/administrator/analytics/sub_category">Sub_category</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/product')) ? 'fw-bold' : '' }}" href="/administrator/analytics/product">Product</a></li>
-                            </ul>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingAnalytics">
+                            <button class="accordion-button bg-light {{ (request()->is('administrator/analytics*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAnalytics" aria-expanded="true" aria-controls="collapseAnalytics">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Analytics
+                            </button>
+                        </h2>
+                        <div id="collapseAnalytics" class="accordion-collapse collapse {{ (request()->is('administrator/analytics*')) ? 'show' : '' }}" aria-labelledby="headingAnalytics" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush bg-light d-grid p-0">
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/orders')) ? 'fw-bold' : '' }}" href="/administrator/analytics/orders">Orders</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/sale')) ? 'fw-bold' : '' }}" href="/administrator/analytics/sale">Sale</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/purchase')) ? 'fw-bold' : '' }}" href="/administrator/analytics/purchase">Purchase</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/customers')) ? 'fw-bold' : '' }}" href="/administrator/analytics/customers">Customers</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/category')) ? 'fw-bold' : '' }}" href="/administrator/analytics/category">Category</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/sub_category')) ? 'fw-bold' : '' }}" href="/administrator/analytics/sub_category">Sub_category</a></li>
+                                    <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/analytics/product')) ? 'fw-bold' : '' }}" href="/administrator/analytics/product">Product</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="accordion-item bg-primary">
-                    <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator/user_manager" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/user_manager')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            User Manager
-                        </a>
-                    </h2>
-                </div>
+                    <div class="accordion-item bg-primary">
+                        <h2 class="accordion-header" id="headingOne">
+                            <a href="/administrator/user_manager" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/user_manager')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                User Manager
+                            </a>
+                        </h2>
+                    </div>
 
-                <div class="accordion-item bg-primary">
-                    <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator/theme" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/theme')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Theme Manager
-                        </a>
-                    </h2>
-                </div>
+                    <div class="accordion-item bg-primary">
+                        <h2 class="accordion-header" id="headingOne">
+                            <a href="/administrator/settings" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/settings')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                                <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
+                                Settings
+                            </a>
+                        </h2>
+                    </div>
 
-                <div class="accordion-item bg-primary">
-                    <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator/settings" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/settings')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Settings
-                        </a>
-                    </h2>
-                </div>
+                @endif
 
-                <div class="accordion-item bg-primary">
-                    <h2 class="accordion-header" id="headingOne">
-                        <a href="/administrator/update" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator/update')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Update
-                        </a>
-                    </h2>
-                </div>
 
                 <!-- <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">

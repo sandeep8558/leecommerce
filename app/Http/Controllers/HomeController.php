@@ -35,11 +35,11 @@ class HomeController extends Controller
                 break;
 
                 case "Web-Admin":
-                return redirect('/webadmin');
+                return redirect('/administrator');
                 break;
 
                 case "Store Manager":
-                return redirect('/storemanager');
+                return redirect('/administrator');
                 break;
 
                 case "Customer":

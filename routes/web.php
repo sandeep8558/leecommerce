@@ -50,12 +50,8 @@ Route::group(['middleware'=>['auth']], function(){
 
 /* Common Auth Routes */
 Route::group(['middleware'=>['auth']], function(){
-    
     Route::get('/common/print/product/{id}', [App\Http\Controllers\CommonController::class, 'product']);
-
     Route::get('/administrator', [App\Http\Controllers\AdministratorController::class, 'index'])->name("administrator");
-    Route::get('/administrator/update', [App\Http\Controllers\AdministratorController::class, 'update']);
-
 });
 
 
@@ -75,6 +71,7 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
     Route::get('/administrator/reports/purchase', [App\Http\Controllers\ReportsController::class, 'purchase']);
     Route::get('/administrator/reports/sale', [App\Http\Controllers\ReportsController::class, 'sale']);
     Route::get('/administrator/reports/invoices', [App\Http\Controllers\ReportsController::class, 'invoices']);
+    Route::get('/administrator/reports/products', [App\Http\Controllers\ReportsController::class, 'products']);
 
     /* Analytics */
     Route::get('/administrator/analytics/orders', [App\Http\Controllers\GraphController::class, 'orders']);
@@ -90,7 +87,7 @@ Route::group(['middleware'=>['auth', 'administrator']], function(){
 
 /* Web-Admin Routes */
 Route::group(['middleware'=>['auth', 'webadmin']], function(){
-    Route::get('/webadmin', [App\Http\Controllers\AdministratorController::class, 'index'])->name("webadmin");
+    Route::get('/webadmin', [App\Http\Controllers\AdministratorController::class, 'index']);
 
     /* Website Manager */
     Route::get('/administrator/website_manager/slider', [App\Http\Controllers\AdministratorController::class, 'website_manager_slider']);
@@ -117,8 +114,9 @@ Route::group(['middleware'=>['auth', 'webadmin']], function(){
 
 /* Store Manager Routes */
 Route::group(['middleware'=>['auth', 'storemanager']], function(){
+    
     Route::get('/storemanager', [App\Http\Controllers\AdministratorController::class, 'index'])->name("storemanager");
-    /* Orders Manager */
+
     Route::get('/administrator/orders/pending', [App\Http\Controllers\AdministratorController::class, 'pending']);
     Route::get('/administrator/orders/accepted', [App\Http\Controllers\AdministratorController::class, 'accepted']);
     Route::get('/administrator/orders/packed', [App\Http\Controllers\AdministratorController::class, 'packed']);
@@ -131,6 +129,7 @@ Route::group(['middleware'=>['auth', 'storemanager']], function(){
     Route::get('/administrator/order/{id}/reverse/{what}', [App\Http\Controllers\AdministratorController::class, 'reverse']);
     Route::get('/administrator/print/{id}/label', [App\Http\Controllers\AdministratorController::class, 'label']);
     Route::get('/administrator/print/{id}/receipt', [App\Http\Controllers\AdministratorController::class, 'receipt']);
+
 });
 
 

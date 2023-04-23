@@ -16,11 +16,11 @@
                 @break
 
                 @case("Web-Admin")
-                    <a class="btn btn-dark" target="_blank" href="/webadmin">Web-Admin</a>
+                    <a class="btn btn-dark" target="_blank" href="/administrator">Web-Admin</a>
                 @break
 
                 @case("Store Manager")
-                    <a class="btn btn-dark" target="_blank" href="/storemanager">Store Manager</a>
+                    <a class="btn btn-dark" target="_blank" href="/administrator">Store Manager</a>
                 @break
             
             @endswitch

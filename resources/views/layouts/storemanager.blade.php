@@ -9,9 +9,6 @@
 
     @yield('head')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -21,7 +18,7 @@
 <div id="menu" class="menu bg-light">
     <div class="menu-container">
         <div class="container p-0 bg-dark text-light">
-            <p class="text-uppercase mb-0 p-3">STORE MANAGER</p>
+            <p class="text-uppercase mb-0 p-3">Store Manager</p>
         </div>
 
         <ul class="list-group mb-5 rounded-0 accordion p-1" id="accordionExample">
@@ -29,53 +26,36 @@
 
             <div class="accordion" id="accordionExample">
 
-            
                 <div class="accordion-item bg-primary">
                     <h2 class="accordion-header" id="headingOne">
-                        <a href="/storemanager" class="btn accordion-button collapsed no-caret {{ (request()->is('storemanager')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                        <a href="/administrator" class="btn accordion-button collapsed no-caret {{ (request()->is('administrator')) ? 'bg-primary text-light' : 'bg-light text-dark' }}" data-bs-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
                             Dashboard
                         </a>
                     </h2>
                 </div>
 
-                <!-- <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOrderssManager">
+                        <button class="accordion-button bg-light {{ (request()->is('administrator/orders*')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrderssManager" aria-expanded="true" aria-controls="collapseOrderssManager">
                             <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Accordion Item #1
+                            Order Manager
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOrderssManager" class="accordion-collapse collapse {{ (request()->is('administrator/orders*')) ? 'show' : '' }}" aria-labelledby="headingOrderssManager" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/3">Construction</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/1">English</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/2">Marathi</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/53">Information</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/pending')) ? 'fw-bold' : '' }}" href="/administrator/orders/pending">Pending</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/accepted')) ? 'fw-bold' : '' }}" href="/administrator/orders/accepted">Accepted</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/packed')) ? 'fw-bold' : '' }}" href="/administrator/orders/packed">Packed</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/shipped')) ? 'fw-bold' : '' }}" href="/administrator/orders/shipped">Shipped</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/delivered')) ? 'fw-bold' : '' }}" href="/administrator/orders/delivered">Delivered</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/cancelled')) ? 'fw-bold' : '' }}" href="/administrator/orders/cancelled">Cancelled & Pending</a></li>
+                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0 {{ (request()->is('administrator/orders/search')) ? 'fw-bold' : '' }}" href="/administrator/orders/search">Search Order</a></li>
                             </ul>
                         </div>
                     </div>
-                </div> -->
-                
-                <!-- <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-tachometer-alt mr-2"></i>
-                            Accordion Item #2
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <ul class="list-group list-group-flush bg-light d-grid p-0">
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/3">Construction</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/1">English</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/2">Marathi</a></li>
-                                <li class="list-group-item" style="background: transparent !important;"><a class="btn btn-sm btn-default btn-full border-0" href="/course/53">Information</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> -->
+                </div>
 
             </div>
 
@@ -117,6 +97,10 @@
 </div>
 
 @include('sweetalert::alert')
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+@yield('scripts')
 
 </body>
 </html>

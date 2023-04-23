@@ -341,9 +341,4 @@ class AdministratorController extends Controller
         return view("administrator.theme", compact("theme"));
     }
 
-    public function update(){
-        shell_exec('git pull origin main');
-        return back();
-    }
-
 }

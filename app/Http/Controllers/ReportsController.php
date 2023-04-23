@@ -154,4 +154,16 @@ class ReportsController extends Controller
         return view("administrator.reports.invoices", compact("from", "to", "sale", "mrp_total", "cost_total", "tax_total", "rate_total", "discount", "offer_discount", "delivery", "payable", "invoices"));
     }
 
+    public function products(){
+        $today = date('Y-m-d');
+        $from = $today;
+        $to = $today;
+        if(isset($request->from)){ $from = $request->from; }
+        if(isset($request->to)){ $to = $request->to; }
+
+        $sale = OrderData::whereDate('created_at', '>=', $from)->whereDate('created_at', '<=', $to);
+
+        return view("administrator.reports.products", compact("from", "to"));
+    }
+
 }
