@@ -317,14 +317,14 @@ class AdministratorController extends Controller
 
             $t = '$primary:'.$theme->primary.';$secondary:'.$theme->secondary.';$success:'.$theme->success.';$info:'.$theme->info.';$warning:'.$theme->warning.';$danger:'.$theme->danger.';$light:'.$theme->light.';$dark:'.$theme->dark.';';
 
-            $p = Process::fromShellCommandline("echo ".$t." > ../resources/sass/_variables.scss");
+            $p = Process::fromShellCommandline("echo '".$t."' > ../resources/sass/_variables.scss");
             $p->setTimeout(300);
             $p->run();
 
             //$process = Process::fromShellCommandline('npm run dev');
-            $process = new Process(["npm", "run", "dev"]);
+            /* $process = new Process(["npm", "run", "dev"]);
             $process->setTimeout(300);
-            $process->run();
+            $process->run(); */
 
             //return shell_exec("/var/www/html/aiyanaa.com npm run prod");
 
