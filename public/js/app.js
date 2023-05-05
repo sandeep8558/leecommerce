@@ -8859,7 +8859,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['delivery_timing', 'buyqty', 'delivery_charges', 'free_delivery_amount', 'minimum_order_amount', 'user', 'alladdresses', 'cod', 'online', 'app_name', 'logo', 'color'],
+  props: ['delivery_timing', 'buyqty', 'delivery_charges', 'free_delivery_amount', 'minimum_order_amount', 'user', 'alladdresses', 'cod', 'online', 'app_name', 'logo', 'color', 'razorpay_key'],
   components: {},
   data: function data() {
     var _this = this;
@@ -8894,7 +8894,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       addresses: [],
       options: {
-        key: "rzp_test_It40r8yHilOcW7",
+        key: this.razorpay_key,
         amount: 100,
         currency: "INR",
         name: this.app_name,

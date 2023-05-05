@@ -34,7 +34,7 @@
 </div>
 
 <div class="container mt-3">
-    <checkout color="{{$color}}" :user="{{$user}}" :alladdresses="{{$user->addresses}}" cod="{{$cod}}" online="{{$online}}" app_name="{{$app_name}}" logo="{{$logo}}"  delivery_timing="{{$delivery_timing}}" :buyqty="{{$buyqty}}" :delivery_charges="{{$delivery_charges}}" :free_delivery_amount="{{$free_delivery_amount}}" :minimum_order_amount="{{$minimum_order_amount}}"><checkout>
+    <checkout razorpay_key="{{$razorpay_key}}" color="{{$color}}" :user="{{$user}}" :alladdresses="{{$user->addresses}}" cod="{{$cod}}" online="{{$online}}" app_name="{{$app_name}}" logo="{{$logo}}"  delivery_timing="{{$delivery_timing}}" :buyqty="{{$buyqty}}" :delivery_charges="{{$delivery_charges}}" :free_delivery_amount="{{$free_delivery_amount}}" :minimum_order_amount="{{$minimum_order_amount}}"><checkout>
 </div>
 
 @endsection

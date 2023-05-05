@@ -34,8 +34,10 @@ class CheckoutController extends Controller
         $online = Setting::where('key', 'Online payment')->exists() ? Setting::where('key', 'Online payment')->first()->val : null;
         $color = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
 
+        $razorpay_key = Setting::where('key', 'Razorpay API Key')->exists() ? Setting::where('key', 'Razorpay API Key')->first()->val : null;
+
         $meta = Page::where('page', 'Checkout')->latest()->first();
-        return view("website.checkout", compact("delivery_timing", "buyqty", "delivery_charges", "free_delivery_amount", "minimum_order_amount", "user", "cod", "online", "color", "meta"));
+        return view("website.checkout", compact("delivery_timing", "buyqty", "delivery_charges", "free_delivery_amount", "minimum_order_amount", "user", "cod", "online", "color", "meta", "razorpay_key"));
     }
 
     public function save_address(AddressRequest $request){
