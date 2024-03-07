@@ -34,7 +34,11 @@ class SubCategory extends Model
     protected $appends = ['data_category'];
 
     public function getDataCategoryAttribute(){
-        return $this->category->category;
+        $cat = null;
+        if(isset($this->category)){
+            $cat = $this->category->category;
+        }
+        return $cat;
     }
 
 }
