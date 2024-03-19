@@ -303,8 +303,6 @@ class AdministratorController extends Controller
 
     public function theme(Request $request){
 
-        
-
         if(isset($request->primary)){
 
             Setting::where('key', 'Theme Color')->update([
@@ -317,6 +315,8 @@ class AdministratorController extends Controller
 
             $t = '$primary:'.$theme->primary.';$secondary:'.$theme->secondary.';$success:'.$theme->success.';$info:'.$theme->info.';$warning:'.$theme->warning.';$danger:'.$theme->danger.';$light:'.$theme->light.';$dark:'.$theme->dark.';';
 
+            /* {"primary":"#000000","secondary":"#000000","success":"#000000","info":"#000000","warning":"#000000","danger":"#000000","light":"#000000","dark":"#000000"} */
+
             shell_exec("echo '".$t."' > ../resources/sass/_variables.scss");
 
             /* $p = Process::fromShellCommandline("echo '".$t."' > ../resources/sass/_variables.scss");
@@ -328,15 +328,14 @@ class AdministratorController extends Controller
             $process->setTimeout(300);
             $process->run(); */
 
-            //return shell_exec("/var/www/html/aiyanaa.com npm run prod");
-
-            /* return "PTL"; */
+            return shell_exec("/var/www/html/aiyanaa.com npm run dev");
 
         } else {
 
-            $theme = Setting::where('key', 'Theme Color')->exists() ? Setting::where('key', 'Theme Color')->first()->val : null;
-
-            $theme = json_decode($theme);
+            if(Setting::where('key', 'Theme Color')->exists()){
+                $theme = Setting::where('key', 'Theme Color')->first()->val;
+                $theme = json_decode($theme);
+            }
 
         }
 

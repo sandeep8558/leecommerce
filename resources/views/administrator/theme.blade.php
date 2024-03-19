@@ -5,8 +5,10 @@
 @endsection
 
 @section('content')
+
 @if(isset($theme->primary))
 <div class="container-fluid p-4">
+
     <form action="/administrator/theme" method="get">
 
         <div class="mb-3">
